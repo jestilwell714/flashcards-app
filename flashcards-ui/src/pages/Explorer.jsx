@@ -7,8 +7,16 @@ import { useState } from "react";
 
 export default function Explorer() {
     const [selectedMode, setSelectedMode] = useState("preview");
-    const [selectedItem, setSelectedItem] = useState("Root Folder");
+    const [selectedItem, setSelectedItem] = useState(null);
     const [selectedType, setSelectedType] = useState("root");
+    const [refreshKey, setRefreshKey] = useState(0);
+
+    const triggerRefresh = () => setRefreshKey(prev => prev + 1);
+
+    function handleCardCreated() {
+        triggerRefresh();
+        setSelectedMode("preview");
+    }
 
     function handleSelect(item, type, mode) {
         setSelectedMode(mode);
@@ -28,13 +36,15 @@ export default function Explorer() {
         setSelectedMode("edit");
     }
 
+    
+
     return (   
             <div>
-                {selectedMode === "preview" && <PreviewPanel item={selectedItem} type={selectedType} onPlay={handleCramMode} onCreate={handleCreateMode} onEdit={handleEditMode}/>} 
+                {selectedMode === "preview" && <PreviewPanel item={selectedItem} type={selectedType} onPlay={handleCramMode} onCreate={selectedType => handleCreateMode(selectedType)} onEdit={handleEditMode}/>} 
                 {selectedMode === "edit" && <EditPanel item={selectedItem} type={selectedType} />} 
-                {selectedMode === "create" && <CreatePanel item={selectedItem} type={selectedType} />} 
-                {selectedMode === "cram" && <CramMode />} 
-                <FileExplorer onSelectItem={handleSelect} />
+                {selectedMode === "create" && <CreatePanel type={selectedType} onCardCreated={handleCardCreated} /> }
+                {selectedMode === "cram" && <CramMode/>} 
+                <FileExplorer onSelectItem={handleSelect} refreshKey={refreshKey} onCreate={triggerRefresh}/>
             </div>
     );
 }

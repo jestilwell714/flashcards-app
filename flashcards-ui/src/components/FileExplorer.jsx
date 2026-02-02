@@ -3,13 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import CreateDeckOrFolder from "./CreateDeckOrFolder";
 
 
-export default function FileExplorer( {onSelectItem} ) {
+export default function FileExplorer( {onSelectItem, refreshKey, onCreate} ) {
     const { type, id } = useParams();
     const [content,setContent] = useState([]);
     const [isCreate, setIsCreate] = useState(false);
     const [createType, setCreateType] = useState(null);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [refreshKey, setRefreshKey] = useState(0);
     
     let fetchContentsUrl = type === "deck" ? `http://localhost:8080/api/decks/${id}/flashcards` : (type === "root" ? `http://localhost:8080/api/content` : `http://localhost:8080/api/content/${id}`);
 
@@ -51,7 +50,7 @@ export default function FileExplorer( {onSelectItem} ) {
 
     function handleSubmit() {
         setIsCreate(false);
-        setRefreshKey(prev => prev +1);
+        onCreate();
     }
 
     function handleDelete(e,item) {
@@ -73,8 +72,8 @@ export default function FileExplorer( {onSelectItem} ) {
         }
         })
         .then(response => {
-            if (response.ok) {
-                setRefreshKey(prev => prev + 1);
+            if(response.ok) {
+                onCreate();
             }
         })
         .catch(err => console.error("Delete error:", err));

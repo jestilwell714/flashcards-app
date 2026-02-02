@@ -1,14 +1,16 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 
-export default function CreateFlashCard({ initialData }) {
+export default function CreateFlashCard({ initialData, onSubmit }) {
+    const { id } = useParams();
     const isEdit = !!initialData;
-    const createFlashCardUrl = 'http://localhost:8080/decks/{deckId}/flashcards';
-    const editFlashCardUrl = 'http://localhost:8080/flashcards/{flashCardId}';
+    const url = isEdit ? `http://localhost:8080/api/flashcards/${initialData.id}` : `http://localhost:8080/api/decks/${id}/flashcards`;
     const [formData, setFormData] = useState(initialData || { question: '', answer: ''});
+
 
     function handleSubmit(e) {
         e.preventDefault();
-        fetch(isEdit ?  editFlashCardUrl : createFlashCardUrl, {
+        fetch(url, {
             method: isEdit ? 'PUT' : 'POST',
             headers: { 'Content-Type': 'application/json',
                        'X-User-ID': '1'
@@ -17,6 +19,7 @@ export default function CreateFlashCard({ initialData }) {
         })
         .then(response => {
             if (!response.ok) console.error("Database didn't create/edit flashcard");
+            onSubmit();
         })
         .catch(error => console.error("Connection error", error));
     }
