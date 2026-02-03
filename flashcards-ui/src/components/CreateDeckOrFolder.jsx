@@ -5,8 +5,11 @@ export default function CreateDeckOrFolder( {parentId, initialData, type, onSubm
     const createDeckUrl = `http://localhost:8080/api/decks`;
     const createFolderUrl = `http://localhost:8080/api/folders`;
 
-    const url = type === "folder" ? (isEdit ?  createFolderUrl+'/'+ initialData.id: createFolderUrl) : (isEdit ?  createDeckUrl + '/'+ initialData.id : createDeckUrl);
-    const [formData, setFormData] = useState(initialData || {name: '', parentFolderId: parentId});
+    const url = type === "folder" ? (isEdit ?  createFolderUrl+'/'+ initialData.id : createFolderUrl) : (isEdit ?  createDeckUrl + '/'+ initialData.id : createDeckUrl);
+    const defaultData = type === "folder" 
+    ? { name: '', parentFolderId: parentId} 
+    : { name: '', folderId: parentId };
+    const [formData, setFormData] = useState(initialData || defaultData);
 
     function handleSubmit(e) {
         e.preventDefault();
