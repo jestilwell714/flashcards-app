@@ -88,16 +88,20 @@ export default function FileExplorer( {onSelectItem, refreshKey, onCreate} ) {
             <ul>
                 <li>
                     <nav>
-                        <button onClick={() => setShowDropdown(!showDropdown)}>Create</button>
-                        {showDropdown && (
-                            <ul>
-                                <li onClick={() => handleCreate("folder")}>
-                                    <h4>Folder</h4>
-                                </li>
-                                <li onClick={() => handleCreate("deck")}>
-                                    <h4>Deck</h4>
-                                </li>
-                            </ul>
+                        { type != "deck" && (
+                        <>
+                            <button onClick={() => setShowDropdown(!showDropdown)}>Create</button>
+                            {showDropdown && (
+                                <ul>
+                                    <li onClick={() => handleCreate("folder")}>
+                                        <h4>Folder</h4>
+                                    </li>
+                                    <li onClick={() => handleCreate("deck")}>
+                                        <h4>Deck</h4>
+                                    </li>
+                                </ul>
+                            )}
+                        </>
                         )}
                     </nav>
                 </li>
