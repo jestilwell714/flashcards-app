@@ -41,8 +41,8 @@ export default function Explorer() {
     return (   
             <div>
                 {selectedMode === "preview" && <PreviewPanel item={selectedItem} type={selectedType} onPlay={handleCramMode} onCreate={selectedType => handleCreateMode(selectedType)} onEdit={handleEditMode}/>} 
-                {selectedMode === "edit" && <EditPanel item={selectedItem} type={selectedType} onCardEdited={handleCardCreated}/>} 
-                {selectedMode === "create" && <CreatePanel type={selectedType} onCardCreated={handleCardCreated} /> }
+                {(selectedMode === "edit" && selectedType === "root") && <EditPanel item={selectedItem} type={selectedType} onCardEdited={handleCardCreated}/>} 
+                {(selectedMode === "create" && selectedType !== "deck") && <CreatePanel type={selectedType} onCardCreated={handleCardCreated} /> }
                 {selectedMode === "cram" && <CramMode/>} 
                 <FileExplorer onSelectItem={handleSelect} refreshKey={refreshKey} onCreate={triggerRefresh}/>
             </div>
