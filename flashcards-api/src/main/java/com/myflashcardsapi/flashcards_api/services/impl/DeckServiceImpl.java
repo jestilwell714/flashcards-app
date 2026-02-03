@@ -60,13 +60,16 @@ public class DeckServiceImpl implements DeckService {
         Deck deck = deckRepository.findByIdAndUserId(deckId, userId).get();
 
         // Change name if changed
-        if(!deck.getName().equalsIgnoreCase(deckDto.getName()) && (Objects.equals(deck.getFolder().getId(), deckDto.getFolderId()))) {
+        Long folderId = null;
+        if(deck.getFolder() != null) folderId = deck.getFolder().getId();
+
+        if(!deck.getName().equalsIgnoreCase(deckDto.getName()) && (Objects.equals(folderId, deckDto.getFolderId()))) {
             if (deckRepository.existsByNameIgnoreCaseAndUserIdAndFolderId(deckDto.getName(), userId, deckDto.getFolderId())) {
                 throw new BadRequestException("Deck with the name " + deckDto.getName() + " already exists in this folder");
             }
 
         }
-        if (!Objects.equals(deckDto.getFolderId(), deck.getFolder().getId())) {
+        if (!Objects.equals(deckDto.getFolderId(), folderId)) {
             if (deckDto.getFolderId() == null) {
                 // Moving to root
                 if (deckRepository.existsByNameIgnoreCaseAndUserIdAndFolderId(deckDto.getName(), userId, null)) {
