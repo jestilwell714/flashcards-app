@@ -22,10 +22,11 @@ export default function CreateDeckOrFolder( {parentId, initialData, type, onSubm
         })
         .then(response => {
             if (!response.ok) console.error("Database didn't create/edit deck");
-            onSubmit();
+            initialData = formData;
+            
+            isEdit ? onSubmit(initialData) : onSubmit();
         })
         .catch(error => console.error("Connection error", error));
-        
     }
 
     function handleChange(e) {
