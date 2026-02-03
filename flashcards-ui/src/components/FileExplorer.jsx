@@ -21,11 +21,10 @@ export default function FileExplorer( {onSelectItem, refreshKey, onCreate} ) {
         })
         .then(response => response.json())
         .then(data => { 
-                if (Array.isArray(data)) {
-                setContent(data);
-            } else {
-                setContent([data]);
-            }
+                const sortedData = Array.isArray(data) 
+                    ? data.sort((a, b) => a.id - b.id) 
+                    : [data];
+                    setContent(sortedData);
             }
         ).catch(err => console.error("Fetch failed:", err));
     }, [fetchContentsUrl,refreshKey]); 
@@ -33,13 +32,18 @@ export default function FileExplorer( {onSelectItem, refreshKey, onCreate} ) {
     const navigate = useNavigate();
 
     function handleClick(item) {
+        let type = "";
+        if(item.type == undefined) {
+            type = "flashcard";
+        } else type = item.type;
+
         let mode = "preview";
-        if(type == null) {
+        if(type == "flashcard") {
             mode = "edit";
         } else {
             navigate(`/explorer/${item.type}/${item.id}`);
         }
-        onSelectItem(item, item.type, mode);
+        onSelectItem(item, type, mode);
     }
 
     function handleCreate(type ) {
