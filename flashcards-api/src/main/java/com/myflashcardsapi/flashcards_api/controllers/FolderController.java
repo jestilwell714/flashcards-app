@@ -43,7 +43,7 @@ public class FolderController {
     @GetMapping("/folders/{folderId}")
     public ResponseEntity<FolderDto> getFolderByFolderId(@PathVariable Long folderId, @RequestHeader("X-User-ID") Long userId) {
         try {
-            FolderDto folder = folderService.getFolderByIdAndUser(folderId,userId).get();
+            FolderDto folder = folderService.getFolderByIdAndUser(userId, folderId).get();
             return new ResponseEntity<>(folder,HttpStatus.OK);
         } catch(NoSuchElementException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
