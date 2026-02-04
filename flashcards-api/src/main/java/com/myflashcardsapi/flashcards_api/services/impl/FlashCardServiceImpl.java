@@ -178,7 +178,7 @@ public class FlashCardServiceImpl implements FlashCardService {
 
     @Override
     public List<FlashCardDto> getFlashCardsForCramByDeckId(Long userId, Long deckId) {
-        List<FlashCardDto> flashCardDtoList = getFlashCardsByDeckIdAndUser(userId,deckId);
+        List<FlashCardDto> flashCardDtoList = getFlashCardsByDeckIdAndUser(deckId,userId);
         return studyEngineService.getCardBatchForCramMode(flashCardDtoList);
     }
 
