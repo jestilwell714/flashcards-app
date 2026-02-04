@@ -62,7 +62,7 @@ public class FolderController {
 
     // --- UPDATE ---
     @PutMapping("/folders/{folderId}")
-    public ResponseEntity<FolderDto> updateFolder(@PathVariable Long folderId, @RequestHeader("X-User-ID") Long userId, @RequestHeader FolderDto folderDto) throws BadRequestException {
+    public ResponseEntity<FolderDto> updateFolder(@PathVariable Long folderId, @RequestHeader("X-User-ID") Long userId, @RequestBody FolderDto folderDto) throws BadRequestException {
         FolderDto folder = folderService.updateFolder(userId,folderId,folderDto);
         return new ResponseEntity<>(folder,HttpStatus.OK);
     }
