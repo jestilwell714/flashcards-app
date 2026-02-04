@@ -22,7 +22,7 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
         .then(response => response.json())
         .then(data => { 
                 const sortedData = Array.isArray(data) 
-                    ? data.sort((a, b) => a.id - b.id) 
+                    ? data.sort((a, b) => b.id - a.id) 
                     : [data];
                     setContent(sortedData);
             }

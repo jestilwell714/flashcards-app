@@ -1,11 +1,12 @@
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-export default function CreateDeckOrFolder( {parentId, initialData, type, onSubmit} ) {
+export default function CreateDeckOrFolder( {parentId, initialData, onSubmit} ) {
+    const {type} = useParams();
     const isEdit = !!initialData;
-    const createDeckUrl = `http://localhost:8080/api/decks`;
-    const createFolderUrl = `http://localhost:8080/api/folders`;
+    const createUrl = `http://localhost:8080/api/${type}s`;
 
-    const url = type === "folder" ? (isEdit ?  createFolderUrl+'/'+ initialData.id : createFolderUrl) : (isEdit ?  createDeckUrl + '/'+ initialData.id : createDeckUrl);
+    const url = isEdit ?  createUrl+'/'+ initialData.id : createUrl;
     const defaultData = type === "folder" 
     ? { name: '', parentFolderId: parentId} 
     : { name: '', folderId: parentId };
@@ -22,9 +23,9 @@ export default function CreateDeckOrFolder( {parentId, initialData, type, onSubm
         })
         .then(response => {
             if (!response.ok) console.error("Database didn't create/edit deck");
-            initialData = formData;
             
-            isEdit ? onSubmit(initialData) : onSubmit();
+            
+            isEdit ? onSubmit(formData) : onSubmit();
         })
         .catch(error => console.error("Connection error", error));
     }

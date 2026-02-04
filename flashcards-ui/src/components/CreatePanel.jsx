@@ -3,5 +3,5 @@ import CreateFlashCard from "./CreateFlashCard";
 
 export default function CreatePanel({ onCardCreated}) {
     const {type} = useParams();
-    if(type === "deck") return <CreateFlashCard onSubmit={onCardCreated}/>;
+    if(type == "deck") return <CreateFlashCard onSubmit={onCardCreated}/>;
 }

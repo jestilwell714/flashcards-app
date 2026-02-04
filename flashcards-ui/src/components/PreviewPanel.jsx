@@ -14,11 +14,11 @@ export default function PreviewPanel( {item} ) {
     const cramModeUrl = type === "root" ? '/cram/root/0' : `/cram/${type}/${item.id}`;
 
     function handleCreate() {
-        navigate(`/explorer/create/decks/${id}`);
+        navigate(`/explorer/create/deck/${id}`, {replace : true});
     }
 
     function handleEdit() {
-        navigate(`/explorer/edit/${type}/${id}`);
+        navigate(`/explorer/edit/${type}/${id}`, {replace : true});
     }
 
     function handlePlay() {

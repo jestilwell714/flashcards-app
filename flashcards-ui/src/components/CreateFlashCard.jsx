@@ -1,11 +1,27 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-export default function CreateFlashCard({ initialData, onSubmit }) {
-    const { id } = useParams();
-    const isEdit = !!initialData;
-    const url = isEdit ? `http://localhost:8080/api/flashcards/${initialData.id}` : `http://localhost:8080/api/decks/${id}/flashcards`;
-    const [formData, setFormData] = useState(initialData || { question: '', answer: ''});
+
+export default function CreateFlashCard({ onSubmit }) {
+    const { id, cardId,mode } = useParams();
+    const isEdit = mode == "edit";
+    const [formData, setFormData] = useState({ question: '', answer: ''});
+    const url = isEdit ? `http://localhost:8080/api/flashcards/${formData.id}` : `http://localhost:8080/api/decks/${id}/flashcards`;
+
+    useEffect(() => {
+            if(isEdit) {
+           fetch(`http://localhost:8080/api/flashcards/${cardId}`,  {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-User-ID': '1'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                setFormData(data);
+            }).catch(err => console.error("Fetch failed:", err));
+        }
+            }, [cardId,isEdit]);
 
 
     function handleSubmit(e) {
@@ -19,7 +35,7 @@ export default function CreateFlashCard({ initialData, onSubmit }) {
         })
         .then(response => {
             if (!response.ok) console.error("Database didn't create/edit flashcard");
-            onSubmit();
+            isEdit ? onSubmit(formData) : onSubmit();
         })
         .catch(error => console.error("Connection error", error));
     }

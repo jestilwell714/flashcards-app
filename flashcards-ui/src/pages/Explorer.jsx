@@ -16,18 +16,22 @@ export default function Explorer() {
 
     function handleCardCreated() {
         triggerRefresh();
-        navigate(`/explorer/preview/deck/${id}`);
+        navigate(`/explorer/preview/deck/${id}`, {replace : true});
     }
 
     function handleCardEdited(updatedItem) {
         setSelectedItem(updatedItem);
-        navigate(`/explorer/preview/deck/${id}`);
         triggerRefresh();
+        if(cardId) {
+            navigate(-1);
+        } else {
+            navigate(`/explorer/preview/${type}/${id}`, {replace : true});
+        }
     }
 
     useEffect(() => {
         if (id && type && type !== "root") {
-       fetch(/*cardId ? `http://localhost:8080/api/flashcards/${cardId}` :*/ `http://localhost:8080/api/${type}s/${id}`, {
+       fetch( `http://localhost:8080/api/${type}s/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-User-ID': '1'
@@ -36,7 +40,6 @@ export default function Explorer() {
         .then(response => response.json())
         .then(data => {
             setSelectedItem(data);
-            //setSelectedMode(cardId ? "edit" : "preview");
         }).catch(err => console.error("Fetch failed:", err));
     }
         }, [id, type, cardId]);
@@ -49,7 +52,7 @@ export default function Explorer() {
                 <main className="overflow-y-auto p-12 flex justify-center items-start">
                 <div className="w-full max-w-3xl">
                     {mode === "preview" && <PreviewPanel item={selectedItem} />} 
-                    {(mode === "edit" && type !== "root") && <EditPanel item={selectedItem} onCardEdited={handleCardEdited} />} 
+                    {(mode === "edit" && type !== "root") && <EditPanel item={selectedItem}  onCardEdited={handleCardEdited} />} 
                     {(mode === "create" && type === "deck") && <CreatePanel onCardCreated={handleCardCreated} /> }
                     {(mode === "cram" && !cardId)&& <CramMode/>} 
                 </div>

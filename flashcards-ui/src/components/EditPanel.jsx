@@ -3,9 +3,9 @@ import CreateDeckOrFolder from "./CreateDeckOrFolder";
 import CreateFlashCard from "./CreateFlashCard";
 
 export default function EditPanel({ item, onCardEdited}) {
-    const {type} = useParams;
+    const {type, cardId} = useParams();
 
-    if(type == "flashcard") return <CreateFlashCard initialData={item} onSubmit={onCardEdited}/>;
-    if(type == "deck") return <CreateDeckOrFolder initialData={item} type="deck" onSubmit={onCardEdited}/>;
-    if(type == "folder") return <CreateDeckOrFolder initialData={item} type="folder" onSubmit={onCardEdited}/>;
+    if(cardId) return <CreateFlashCard key={cardId} initialData={item} onSubmit={onCardEdited}/>;
+    else if(type == "deck") return <CreateDeckOrFolder initialData={item}  onSubmit={onCardEdited}/>;
+    else if(type == "folder") return <CreateDeckOrFolder initialData={item} onSubmit={onCardEdited}/>;
 }
