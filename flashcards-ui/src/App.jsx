@@ -8,10 +8,10 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/explorer/root/0" replace />} />
-        <Route path="/cram/:type/:id" element={<Explorer />} />
-        <Route path="/explorer/:type/:id" element={<Explorer />}/>
-        <Route path="/explorer/:type/:id/card/:cardId" element={<Explorer />} />
+        <Route path="/" element={<Navigate to="/explorer/preview/root/0" replace />} />
+        <Route path="/:mode/:type/:id" element={<Explorer />} />
+        <Route path="/explorer/:mode/:type/:id" element={<Explorer />}/>
+        <Route path="/explorer/:mode/:type/:id/card/:cardId" element={<Explorer />} />
       </Routes>
     </BrowserRouter>
   )

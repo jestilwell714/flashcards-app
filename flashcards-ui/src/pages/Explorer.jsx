@@ -4,11 +4,11 @@ import CreatePanel from "../components/CreatePanel";
 import FileExplorer from "../components/FileExplorer";
 import CramMode from "../components/CramMode";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Explorer() {
-    const { id, type, cardId} = useParams();
-    const [selectedMode, setSelectedMode] = useState("preview");
+    const { mode, id, type, cardId} = useParams();
+    const navigate = useNavigate();
     const [selectedItem, setSelectedItem] = useState(null);
     const [refreshKey, setRefreshKey] = useState(0);
 
@@ -16,21 +16,17 @@ export default function Explorer() {
 
     function handleCardCreated() {
         triggerRefresh();
-        setSelectedMode("preview");
+        navigate();
     }
 
     function handleCardEdited(updatedItem) {
         setSelectedItem(updatedItem);
-        setSelectedMode("preview");
-    }
-
-    function handleSelect(mode) {
-        setSelectedMode(mode);
+        navigate(`/explorer/preview/decks/${id}`);
     }
 
     useEffect(() => {
         if (id && type && type !== "root") {
-       fetch(cardId ? `http://localhost:8080/api/flashcards/${cardId}` : `http://localhost:8080/api/${type}s/${id}`, {
+       fetch(/*cardId ? `http://localhost:8080/api/flashcards/${cardId}` :*/ `http://localhost:8080/api/${type}s/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-User-ID': '1'
@@ -39,23 +35,11 @@ export default function Explorer() {
         .then(response => response.json())
         .then(data => {
             setSelectedItem(data);
-            setSelectedMode(cardId ? "edit" : "preview");
+            //setSelectedMode(cardId ? "edit" : "preview");
         }).catch(err => console.error("Fetch failed:", err));
     }
-        }, [id, type,cardId]);
-    
+        }, [id, type]);
 
-    function handleCramMode() {
-        setSelectedMode("cram");
-    }
-
-    function handleCreateMode() {
-        setSelectedMode("create");
-    }
-
-    function handleEditMode() {
-        setSelectedMode("edit");
-    }
 
     
 
@@ -63,13 +47,13 @@ export default function Explorer() {
             <div className="grid grid-cols-[38.2%_1fr] h-screen">
                 <main className="overflow-y-auto p-12 flex justify-center items-start">
                 <div className="w-full max-w-3xl">
-                    {selectedMode === "preview" && <PreviewPanel item={selectedItem} onPlay={handleCramMode} onCreate={handleCreateMode} onEdit={handleEditMode}/>} 
-                    {(selectedMode === "edit" && type !== "root") && <EditPanel item={selectedItem} onCardEdited={handleCardEdited} />} 
-                    {(selectedMode === "create" && type === "deck") && <CreatePanel onCardCreated={handleCardCreated} /> }
-                    {(selectedMode === "cram" && !cardId)&& <CramMode/>} 
+                    {mode === "preview" && <PreviewPanel item={selectedItem} />} 
+                    {(mode === "edit" && type !== "root") && <EditPanel item={selectedItem} onCardEdited={handleCardEdited} />} 
+                    {(mode === "create" && type === "deck") && <CreatePanel onCardCreated={handleCardCreated} /> }
+                    {(mode === "cram" && !cardId)&& <CramMode/>} 
                 </div>
                 </main>
-                <FileExplorer onSelectItem={handleSelect} refreshKey={refreshKey} onCreate={triggerRefresh}/>
+                <FileExplorer  refreshKey={refreshKey} onCreate={triggerRefresh}/>
             </div>
     );
 }

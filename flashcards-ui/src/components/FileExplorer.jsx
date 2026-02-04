@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import CreateDeckOrFolder from "./CreateDeckOrFolder";
 
 
-export default function FileExplorer( {onSelectItem, refreshKey, onCreate} ) {
+export default function FileExplorer( {refreshKey, onCreate} ) {
     const { type, id } = useParams();
     const [content,setContent] = useState([]);
     const [isCreate, setIsCreate] = useState(false);
@@ -32,14 +32,11 @@ export default function FileExplorer( {onSelectItem, refreshKey, onCreate} ) {
     const navigate = useNavigate();
 
     function handleClick(item) {
-        let mode = "preview";
         if(item.type == undefined) { 
-            mode = "edit";
-            navigate(`/explorer/${type}/${id}/card/${item.id}`);
+            navigate(`/explorer/edit/${type}/${id}/card/${item.id}`);
         } else {
-            navigate(`/explorer/${item.type}/${item.id}`);
+            navigate(`/explorer/preview/${item.type}/${item.id}`);
         }
-        onSelectItem(mode);
     }
 
     function handleCreate(type ) {

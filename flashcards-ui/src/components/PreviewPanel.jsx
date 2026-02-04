@@ -1,8 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
-export default function PreviewPanel( {item, onPlay, onCreate, onEdit} ) { 
+export default function PreviewPanel( {item} ) { 
     const navigate = useNavigate();
-    const {type} = useParams();
+    const {type, id} = useParams();
 
     if(!item && type != "root") {
         return (
@@ -14,16 +14,15 @@ export default function PreviewPanel( {item, onPlay, onCreate, onEdit} ) {
     const cramModeUrl = type === "root" ? '/cram/root/0' : `/cram/${type}/${item.id}`;
 
     function handleCreate() {
-        onCreate();
+        navigate(`/explorer/create/decks/${id}`);
     }
 
     function handleEdit() {
-        onEdit();
+        navigate(`/explorer/edit/${type}/${id}`);
     }
 
     function handlePlay() {
         navigate(cramModeUrl);
-        onPlay();
     }
 
     return (
