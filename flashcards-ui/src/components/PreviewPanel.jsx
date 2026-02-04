@@ -11,7 +11,7 @@ export default function PreviewPanel( {item} ) {
             </div>
         );
     }   
-    const cramModeUrl = type === "root" ? '/cram/root/0' : `/cram/${type}/${item.id}`;
+    const cramModeUrl = type === "root" ? '/explorer/cram/root/0' : `/explorer/cram/${type}/${item.id}`;
 
     function handleCreate() {
         navigate(`/explorer/create/deck/${id}`, {replace : true});

@@ -3,13 +3,12 @@ import { useNavigate, useParams } from 'react-router-dom';
 import CreateDeckOrFolder from "./CreateDeckOrFolder";
 
 
-export default function FileExplorer( {refreshKey, onCreate} ) {
-    const { type, id } = useParams();
+export default function FileExplorer( {refreshKey, cards,onCreate} ) {
+    const { type, id,mode } = useParams();
     const [content,setContent] = useState([]);
     const [isCreate, setIsCreate] = useState(false);
     const [createType, setCreateType] = useState(null);
     const [showDropdown, setShowDropdown] = useState(false);
-    
     let fetchContentsUrl = type === "deck" ? `http://localhost:8080/api/decks/${id}/flashcards` : (type === "root" ? `http://localhost:8080/api/content` : `http://localhost:8080/api/content/${id}`);
 
     useEffect(() => {
@@ -78,10 +77,11 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
 
 
     return (
+
             <ul>
                 <li>
                     <nav className="flex flex-col">
-                        { type != "deck" && (
+                        { (type != "deck" && mode != "cram") && (
                         <>
                             <button onClick={() => setShowDropdown(!showDropdown)}>Create</button>
                             {showDropdown && (
@@ -99,7 +99,8 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
                     </nav>
                 </li>
                 {isCreate ? <CreateDeckOrFolder parentId={type === "root" ? null : id} initialData={null} type={createType} onSubmit={handleSubmit}/> : ''}
-                {content.map((item) => (
+                
+                {(mode === "cram" ? cards : content).map((item) => (
                     <li className="file-explorer-row" key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
                         <span className="icon">
                                 {item.type === "folder" ? '📁' : ''}

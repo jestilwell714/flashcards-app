@@ -1,11 +1,11 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import FlashCard from './FlashCard';
 import { useParams } from 'react-router-dom';
 
 
 
 
-export default function CramMode() {
+export default function CramMode({setCardsDone}) {
     const {type, id} = useParams();
     const [cards,setCards] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -14,7 +14,7 @@ export default function CramMode() {
     const fetchMoreCardsUrl = type === "root" ? `http://localhost:8080/api/cram` : `http://localhost:8080/api/cram/${type}/${id}`;
     const submitScoreUrl = 'http://localhost:8080/api/flashcard';
 
-    const fetchMoreCards = useCallback(() => {
+    const fetchMoreCards = () => {
         if (isLoading) return;
         setIsLoading(true);
         fetch(fetchMoreCardsUrl, {
@@ -35,7 +35,7 @@ export default function CramMode() {
             console.error('Error fetching more cards:', error);
             setIsLoading(false);
         });
-    }, [fetchMoreCardsUrl, isLoading]);
+    };
 
     function newCard() {
         if(currentIndex % 5 == 3) {
@@ -55,10 +55,12 @@ export default function CramMode() {
         })
         .then(response => {
             if (!response.ok) console.error("Database didn't update the score");
+            setCardsDone((prev) => [card,...prev]);
+            newCard();
         })
         .catch(err => console.error("Connection error", err));
 
-        newCard();
+        
     }
 
    if (cards.length === 0) {

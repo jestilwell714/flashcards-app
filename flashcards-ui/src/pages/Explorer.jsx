@@ -11,6 +11,7 @@ export default function Explorer() {
     const navigate = useNavigate();
     const [selectedItem, setSelectedItem] = useState(null);
     const [refreshKey, setRefreshKey] = useState(0);
+    const [inPlayCards, setInPlayCards] = useState([]);
 
     const triggerRefresh = () => setRefreshKey(prev => prev + 1);
 
@@ -54,10 +55,11 @@ export default function Explorer() {
                     {mode === "preview" && <PreviewPanel item={selectedItem} />} 
                     {(mode === "edit" && type !== "root") && <EditPanel item={selectedItem}  onCardEdited={handleCardEdited} />} 
                     {(mode === "create" && type === "deck") && <CreatePanel onCardCreated={handleCardCreated} /> }
-                    {(mode === "cram" && !cardId)&& <CramMode/>} 
+                    {(mode === "cram" && !cardId)&& <CramMode setCardsDone={setInPlayCards}/>} 
                 </div>
                 </main>
-                <FileExplorer  refreshKey={refreshKey} onCreate={triggerRefresh}/>
+
+                {(mode != "cram" || inPlayCards.length != 0) &&<FileExplorer  cards={inPlayCards} refreshKey={refreshKey} onCreate={triggerRefresh}/>}
             </div>
     );
 }
