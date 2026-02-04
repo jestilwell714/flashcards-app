@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 
 export default function Explorer() {
-    const { id, type} = useParams();
+    const { id, type, cardId} = useParams();
     const [selectedMode, setSelectedMode] = useState("preview");
     const [selectedItem, setSelectedItem] = useState(null);
     const [refreshKey, setRefreshKey] = useState(0);
@@ -24,15 +24,13 @@ export default function Explorer() {
         setSelectedMode("preview");
     }
 
-    function handleSelect(item, mode) {
+    function handleSelect(mode) {
         setSelectedMode(mode);
-        setSelectedItem(item);
-
     }
 
     useEffect(() => {
         if (id && type && type !== "root") {
-       fetch(`http://localhost:8080/api/${type}s/${id}`, {
+       fetch(cardId ? `http://localhost:8080/api/flashcards/${cardId}` : `http://localhost:8080/api/${type}s/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-User-ID': '1'
@@ -41,9 +39,10 @@ export default function Explorer() {
         .then(response => response.json())
         .then(data => {
             setSelectedItem(data);
+            setSelectedMode(cardId ? "edit" : "preview");
         }).catch(err => console.error("Fetch failed:", err));
     }
-        }, [id, type]);
+        }, [id, type,cardId]);
     
 
     function handleCramMode() {
@@ -65,9 +64,9 @@ export default function Explorer() {
                 <main className="overflow-y-auto p-12 flex justify-center items-start">
                 <div className="w-full max-w-3xl">
                     {selectedMode === "preview" && <PreviewPanel item={selectedItem} onPlay={handleCramMode} onCreate={handleCreateMode} onEdit={handleEditMode}/>} 
-                    {(selectedMode === "edit" && type !== "root") && <EditPanel item={selectedItem} onCardEdited={handleCardEdited} onc/>} 
+                    {(selectedMode === "edit" && type !== "root") && <EditPanel item={selectedItem} onCardEdited={handleCardEdited} />} 
                     {(selectedMode === "create" && type === "deck") && <CreatePanel onCardCreated={handleCardCreated} /> }
-                    {selectedMode === "cram" && <CramMode/>} 
+                    {(selectedMode === "cram" && !cardId)&& <CramMode/>} 
                 </div>
                 </main>
                 <FileExplorer onSelectItem={handleSelect} refreshKey={refreshKey} onCreate={triggerRefresh}/>

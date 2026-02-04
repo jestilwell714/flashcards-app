@@ -10,7 +10,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Navigate to="/explorer/root/0" replace />} />
         <Route path="/cram/:type/:id" element={<Explorer />} />
-        <Route path="/explorer/:type/:id" element={<Explorer />} />
+        <Route path="/explorer/:type/:id" element={<Explorer />}/>
+        <Route path="/explorer/:type/:id/card/:cardId" element={<Explorer />} />
       </Routes>
     </BrowserRouter>
   )

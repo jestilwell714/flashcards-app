@@ -32,17 +32,14 @@ export default function FileExplorer( {onSelectItem, refreshKey, onCreate} ) {
     const navigate = useNavigate();
 
     function handleClick(item) {
-        let type = "";
-        if(item.type == undefined) {
-            type = "flashcard";
-        } else type = item.type;
-
         let mode = "preview";
-        if(type == "flashcard") { 
+        if(item.type == undefined) { 
             mode = "edit";
+            navigate(`/explorer/${type}/${id}/card/${item.id}`);
+        } else {
+            navigate(`/explorer/${item.type}/${item.id}`);
         }
-        navigate(`/explorer/${item.type}/${item.id}`);
-        onSelectItem(item, mode);
+        onSelectItem(mode);
     }
 
     function handleCreate(type ) {
