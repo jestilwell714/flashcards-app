@@ -1,7 +1,16 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-export default function PreviewPanel( {item, type, onPlay, onCreate, onEdit} ) { 
+export default function PreviewPanel( {item, onPlay, onCreate, onEdit} ) { 
     const navigate = useNavigate();
+    const {type} = useParams();
+
+    if(!item && type != "root") {
+        return (
+            <div className="flex items-center justify-center p-12 text-react-cyan animate-pulse">
+                Loading Details...
+            </div>
+        );
+    }   
     const cramModeUrl = type === "root" ? '/cram/root/0' : `/cram/${type}/${item.id}`;
 
     function handleCreate() {

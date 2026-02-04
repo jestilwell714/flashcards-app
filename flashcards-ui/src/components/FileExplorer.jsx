@@ -38,12 +38,11 @@ export default function FileExplorer( {onSelectItem, refreshKey, onCreate} ) {
         } else type = item.type;
 
         let mode = "preview";
-        if(type == "flashcard") {
+        if(type == "flashcard") { 
             mode = "edit";
-        } else {
-            navigate(`/explorer/${item.type}/${item.id}`);
         }
-        onSelectItem(item, type, mode);
+        navigate(`/explorer/${item.type}/${item.id}`);
+        onSelectItem(item, mode);
     }
 
     function handleCreate(type ) {
@@ -87,7 +86,7 @@ export default function FileExplorer( {onSelectItem, refreshKey, onCreate} ) {
     return (
             <ul>
                 <li>
-                    <nav>
+                    <nav className="flex flex-col">
                         { type != "deck" && (
                         <>
                             <button onClick={() => setShowDropdown(!showDropdown)}>Create</button>
@@ -107,7 +106,7 @@ export default function FileExplorer( {onSelectItem, refreshKey, onCreate} ) {
                 </li>
                 {isCreate ? <CreateDeckOrFolder parentId={type === "root" ? null : id} initialData={null} type={createType} onSubmit={handleSubmit}/> : ''}
                 {content.map((item) => (
-                    <li key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
+                    <li className="file-explorer-row" key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
                         <span className="icon">
                                 {item.type === "folder" ? '📁' : ''}
                                 {item.type === "deck" ? '🎴' : ''}
