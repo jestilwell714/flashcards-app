@@ -16,12 +16,13 @@ export default function Explorer() {
 
     function handleCardCreated() {
         triggerRefresh();
-        navigate();
+        navigate(`/explorer/preview/deck/${id}`);
     }
 
     function handleCardEdited(updatedItem) {
         setSelectedItem(updatedItem);
-        navigate(`/explorer/preview/decks/${id}`);
+        navigate(`/explorer/preview/deck/${id}`);
+        triggerRefresh();
     }
 
     useEffect(() => {
@@ -38,7 +39,7 @@ export default function Explorer() {
             //setSelectedMode(cardId ? "edit" : "preview");
         }).catch(err => console.error("Fetch failed:", err));
     }
-        }, [id, type]);
+        }, [id, type, cardId]);
 
 
     
