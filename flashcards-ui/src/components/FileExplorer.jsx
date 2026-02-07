@@ -78,20 +78,27 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
 
     return (
 
-            <ul>
-                <li>
+            <ul className="overflow-y-auto w-screen p-4">
+                <li className="p-2">
                     <nav className="flex flex-col">
-                        { (type != "deck" && mode != "cram") && (
+                        { (mode != "cram") && (
                         <>
                             <button onClick={() => setShowDropdown(!showDropdown)}>Create</button>
                             {showDropdown && (
                                 <ul>
+                                    {type !== "deck" ?
+                                    <>
                                     <li onClick={() => handleCreate("folder")}>
                                         <h4>Folder</h4>
                                     </li>
                                     <li onClick={() => handleCreate("deck")}>
                                         <h4>Deck</h4>
                                     </li>
+                                    </> :
+                                    <li onClick={() => handleCreate("flashcard")}>
+                                        <h4>flashcard</h4>
+                                    </li>
+                                    }
                                 </ul>
                             )}
                         </>
@@ -101,12 +108,12 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
                 {isCreate ? <CreateDeckOrFolder parentId={type === "root" ? null : id} initialData={null} type={createType} onSubmit={handleSubmit}/> : ''}
                 
                 {(mode === "cram" ? cards : content).map((item) => (
-                    <li className="file-explorer-row" key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
-                        <span className="icon">
-                                {item.type === "folder" ? '📁' : ''}
-                                {item.type === "deck" ? '🎴' : ''}
-                        </span>
-                        <h3>{item.type == null ? item.question : item.name}</h3>
+                    <li className="flex flex-row justify-around items-center p-2 cursor-pointer border-b border-gray-700" key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
+                        
+                        <h3 className="w-2/3"><span className="icon">
+                                {item.type === "folder" ? '📁 ' : ''}
+                                {item.type === "deck" ? '🎴 ' : ''}
+                        </span>{item.type == null ? item.question : item.name}</h3>
                         <button onClick={(e) => handleDelete(e,item) }>Delete</button>
                     </li>
                 ))}
