@@ -49,17 +49,16 @@ export default function Explorer() {
     
 
     return (   
-            <div className="grid grid-cols-[38.2%_1fr] h-screen">
-                <main className="overflow-y-auto p-12 flex justify-center items-start">
-                <div className="w-full max-w-3xl">
+            <div className="grid grid-rows-[20%_1fr] h-screen justify-around w-screen">
+                <div className="bg-purple-600">
+                    {type !== "root" && <a onClick={ mode === "cram" ? () => navigate(`/explorer/preview/${type}/${id}`) : () => navigate(-1)}>Back</a>}
                     {mode === "preview" && <PreviewPanel item={selectedItem} />} 
                     {(mode === "edit" && type !== "root") && <EditPanel item={selectedItem}  onCardEdited={handleCardEdited} />} 
                     {(mode === "create" && type === "deck") && <CreatePanel onCardCreated={handleCardCreated} /> }
                     {(mode === "cram" && !cardId)&& <CramMode setCardsDone={setInPlayCards}/>} 
                 </div>
-                </main>
 
                 {(mode != "cram" || inPlayCards.length != 0) &&<FileExplorer  cards={inPlayCards} refreshKey={refreshKey} onCreate={triggerRefresh}/>}
             </div>
-    );
+    );    
 }
