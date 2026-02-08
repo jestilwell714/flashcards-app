@@ -9,6 +9,7 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
     const [isCreate, setIsCreate] = useState(false);
     const [createType, setCreateType] = useState(null);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [showTagDropdown, setShowTagDropdown] = useState(false);
     let fetchContentsUrl = type === "deck" ? `http://localhost:8080/api/decks/${id}/flashcards` : (type === "root" ? `http://localhost:8080/api/content` : `http://localhost:8080/api/content/${id}`);
 
     useEffect(() => {
@@ -80,10 +81,12 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
 
             <ul className="overflow-y-auto w-screen p-4">
                 <li className="p-2">
-                    <nav className="flex flex-col">
+                    <nav className="flex flex-row">
                         { (mode != "cram") && (
+                        
                         <>
-                            <button onClick={() => setShowDropdown(!showDropdown)}>Create</button>
+                            <input placeholder="Search"></input>
+                            <button onClick={() => setShowDropdown(!showDropdown)}>+</button>
                             {showDropdown && (
                                 <ul>
                                     {type !== "deck" ?
@@ -100,6 +103,14 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
                                     </li>
                                     }
                                 </ul>
+                            )}
+
+                            {type === "deck" && <button onClick={() => setShowTagDropdown(!showTagDropdown)}>v</button>}
+                            {showTagDropdown && (
+                                <ul>
+                               
+                                </ul>
+                                /** TODO: make tag request and put tags in */
                             )}
                         </>
                         )}
