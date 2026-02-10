@@ -58,7 +58,7 @@ export default function Explorer() {
                     {(mode === "cram" && !cardId)&& <CramMode setCardsDone={setInPlayCards}/>} 
                 </div>
 
-                {(mode != "cram" || inPlayCards.length != 0) &&<FileExplorer  cards={inPlayCards} refreshKey={refreshKey} onCreate={triggerRefresh}/>}
+                <FileExplorer  cards={inPlayCards} refreshKey={refreshKey} onCreate={triggerRefresh}/>
             </div>
     );    
 }

@@ -10,6 +10,7 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
     const [isCreate, setIsCreate] = useState(false);
     const [createType, setCreateType] = useState(null);
     const [showDropdown, setShowDropdown] = useState(false);
+    const [showPrevCardsDropdown, setShowPrevCardsDropdown] = useState(false);
     //const [showTagDropdown, setShowTagDropdown] = useState(false);
     let fetchContentsUrl = type === "deck" ? `http://localhost:8080/api/decks/${id}/flashcards` : (type === "root" ? `http://localhost:8080/api/content` : `http://localhost:8080/api/content/${id}`);
     //let fetchTagUrl = `http://localhost:8080/api/tags`;
@@ -131,7 +132,9 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
 
 
     return (
-
+        <>
+            {mode === "cram" && <button onClick={() => setShowPrevCardsDropdown(!showPrevCardsDropdown)}>&lt;</button>}
+            { (mode !== "cram" || showPrevCardsDropdown) && (
             <ul className="overflow-y-auto w-screen p-4">
                 <li className="p-2">
                     <nav className="flex flex-row">
@@ -188,5 +191,9 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
                     </li>
                 ))}
             </ul>
+            
+            )}
+            </>
         )
+        
 }
