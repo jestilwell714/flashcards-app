@@ -50,7 +50,7 @@ export default function Explorer() {
 
     return (   
             <div className="grid grid-rows-[20%_1fr] h-screen justify-around w-screen">
-                <div className="bg-purple-600">
+                <div className="bg-indigo-600 w-screen">
                     {type !== "root" && <a onClick={ mode === "cram" ? () => navigate(`/explorer/preview/${type}/${id}`) : () => navigate(-1)}>Back</a>}
                     {mode === "preview" && <PreviewPanel item={selectedItem} />} 
                     {(mode === "edit" && type !== "root") && <EditPanel item={selectedItem}  onCardEdited={handleCardEdited} />} 
