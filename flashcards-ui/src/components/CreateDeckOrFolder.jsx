@@ -1,8 +1,6 @@
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
 
-export default function CreateDeckOrFolder( {parentId, initialData, onSubmit} ) {
-    const {type} = useParams();
+export default function CreateDeckOrFolder( {parentId, type, initialData, onSubmit} ) {
     const isEdit = !!initialData;
     const createUrl = `http://localhost:8080/api/${type}s`;
 
