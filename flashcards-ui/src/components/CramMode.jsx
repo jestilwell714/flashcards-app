@@ -14,6 +14,8 @@ export default function CramMode({setCardsDone}) {
     const fetchMoreCardsUrl = type === "root" ? `http://localhost:8080/api/cram` : `http://localhost:8080/api/cram/${type}/${id}`;
     const submitScoreUrl = 'http://localhost:8080/api/flashcard';
 
+    const card = cards[currentIndex];
+
     const fetchMoreCards = () => {
         if (isLoading) return;
         setIsLoading(true);
@@ -63,14 +65,17 @@ export default function CramMode({setCardsDone}) {
         
     }
 
-   if (cards.length === 0) {
+    if (cards.length === 0) {
         setCardsDone([]);
         fetchMoreCards();
         return <div className="text-center p-10">Loading deck...</div>;
     }
 
+    if (!card) {
+        return <div className="text-center p-10">Loading deck...</div>;
+    }
 
-    const card = cards[currentIndex];
+    
     const question = card.question;
     const answer = card.answer;
     const cardId = card.id;
