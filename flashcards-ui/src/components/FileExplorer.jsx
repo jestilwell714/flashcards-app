@@ -6,11 +6,13 @@ import CreateDeckOrFolder from "./CreateDeckOrFolder";
 export default function FileExplorer( {refreshKey, cards,onCreate} ) {
     const { type, id,mode } = useParams();
     const [content,setContent] = useState([]);
+    //const [tags, setTags] = useState([]);
     const [isCreate, setIsCreate] = useState(false);
     const [createType, setCreateType] = useState(null);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [showTagDropdown, setShowTagDropdown] = useState(false);
+    //const [showTagDropdown, setShowTagDropdown] = useState(false);
     let fetchContentsUrl = type === "deck" ? `http://localhost:8080/api/decks/${id}/flashcards` : (type === "root" ? `http://localhost:8080/api/content` : `http://localhost:8080/api/content/${id}`);
+    //let fetchTagUrl = `http://localhost:8080/api/tags`;
 
     useEffect(() => {
         fetch(fetchContentsUrl, {
@@ -29,6 +31,26 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
         ).catch(err => console.error("Fetch failed:", err));
     }, [fetchContentsUrl,refreshKey]); 
 
+    /** 
+    useEffect(() => {
+        if(type === "deck") {
+        fetch(fetchTagUrl, {
+            headers: {
+                'Content-Type': 'application/json',
+                'X-User-ID': '1'
+            }
+        })
+        .then(response => response.json())
+        .then(data => { 
+                const sortedData = Array.isArray(data) 
+                    ? data.sort((a, b) => a.name.localeCompare(b.name))
+                    : [data];
+                    setTags(sortedData);
+            }
+        ).catch(err => console.error("Tag fetch failed:", err));
+    }
+    }, [type,refreshKey,fetchTagUrl]);
+*/
     const navigate = useNavigate();
 
     function handleClick(item) {
@@ -41,8 +63,12 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
 
     function handleCreate(type ) {
             setShowDropdown(false);
-            setIsCreate(true);
-            setCreateType(type);
+            if(type === "flashcard") {
+                navigate(`/explorer/create/deck/${id}`);
+            } else {
+                setIsCreate(true);
+                setCreateType(type);
+            }
     }
 
     function handleSubmit() {
@@ -104,14 +130,20 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
                                     }
                                 </ul>
                             )}
-
-                            {type === "deck" && <button onClick={() => setShowTagDropdown(!showTagDropdown)}>v</button>}
-                            {showTagDropdown && (
+                           
+                            {/**type === "deck" && <button onClick={() => setShowTagDropdown(!showTagDropdown)}>v</button>}
+                            {showTagDropdown && 
                                 <ul>
-                               
-                                </ul>
-                                /** TODO: make tag request and put tags in */
-                            )}
+                                    <li>All Tags</li>
+                                    {tags.map((item) => (
+                                        <li>
+                                        <   h4>{item.name}</h4>
+                                        </li>
+                                    ))}
+                               </ul>
+                                */
+                            }
+                            
                         </>
                         )}
                     </nav>
