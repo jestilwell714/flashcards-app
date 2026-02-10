@@ -43,7 +43,6 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -69,12 +68,19 @@ button:focus-visible {
 }
 
 @theme {
-  --color-main: #1D2126; 
-  --color-text: #F2F2F2;
+  --color-main: #F2F2F2; 
+  --color-text: #000000;
 
+}
+
+@layer base {
+h2 {
+  @apply text-3xl text-white font-medium;
 }
 
 body {
   @apply bg-main text-text;
 }
 
+
+}
