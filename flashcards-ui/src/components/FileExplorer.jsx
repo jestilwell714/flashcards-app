@@ -24,8 +24,35 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
         .then(response => response.json())
         .then(data => { 
                 const sortedData = Array.isArray(data) 
-                    ? data.sort((a, b) => b.id - a.id) 
-                    : [data];
+                    ? data.sort((a, b) => {
+                        if(a.type == undefined) {
+                            return b.id - a.id;
+                        }
+
+                        let rankA;
+                        let rankB;
+                        if (a.type == "folder") {
+                            rankA = 1;
+                        } else {
+                            rankA = 2;
+                        }
+                        if(b.type == "folder") {
+                            rankB = 1;
+                        } else {
+                            rankB = 2;
+                        }
+
+                        if(rankA !== rankB) {
+                            return rankA - rankB;
+                        }
+
+                        const nameA = (a.name || "").toLowerCase();
+                        const nameB = (b.name || "").toLowerCase();
+                        if (nameA < nameB) return -1;
+                        if (nameA > nameB) return 1;
+                        return 0;
+                    }
+                    ): [data];
                     setContent(sortedData);
             }
         ).catch(err => console.error("Fetch failed:", err));
