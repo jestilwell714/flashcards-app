@@ -64,6 +64,7 @@ export default function CramMode({setCardsDone}) {
     }
 
    if (cards.length === 0) {
+        setCardsDone([]);
         fetchMoreCards();
         return <div className="text-center p-10">Loading deck...</div>;
     }
