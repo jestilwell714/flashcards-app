@@ -1,7 +1,6 @@
 @import "tailwindcss";
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
@@ -38,13 +37,10 @@ h1 {
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
+
   font-family: inherit;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: black 0.25s;
 }
 button:hover {
   border-color: #646cff;
@@ -70,17 +66,51 @@ button:focus-visible {
 @theme {
   --color-main: #F2F2F2; 
   --color-text: #000000;
-
+  --color-second:#4f46e5;
 }
 
 @layer base {
 h2 {
-  @apply text-3xl text-white font-medium;
+  @apply text-3xl text-text font-medium;
 }
 
 body {
   @apply bg-main text-text;
 }
 
-
+.grad {
+  @apply bg-linear-to-br from-blue-500 via-indigo-500 to-purple-600 ;
 }
+
+.grad-back {
+  @apply bg-linear-to-br from-blue-500 to-indigo-600;
+}
+
+body.cram-mode {
+    @apply bg-second;
+}
+}
+
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .transform-style-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+
+  .shoot-off-left {
+    transform: translateX(-150vw) rotate(-20deg);
+    opacity: 0;
+    transition: all 0.5s ease-in;
+  }
+}
+

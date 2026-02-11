@@ -24,7 +24,7 @@ export default function PreviewPanel( {item} ) {
     }
 
     function handlePlay() {
-        navigate(cramModeUrl);
+        navigate(cramModeUrl, { replace : true});
     }
 
     return (

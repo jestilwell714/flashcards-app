@@ -3,14 +3,14 @@ import { useNavigate, useParams } from 'react-router-dom';
 import CreateDeckOrFolder from "./CreateDeckOrFolder";
 
 
-export default function FileExplorer( {refreshKey, cards,onCreate} ) {
+export default function FileExplorer( {refreshKey, cards,onCreate, showPrevCardsDropdown} ) {
     const { type, id,mode } = useParams();
     const [content,setContent] = useState([]);
     //const [tags, setTags] = useState([]);
     const [isCreate, setIsCreate] = useState(false);
     const [createType, setCreateType] = useState(null);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [showPrevCardsDropdown, setShowPrevCardsDropdown] = useState(false);
+    
     //const [showTagDropdown, setShowTagDropdown] = useState(false);
     let fetchContentsUrl = type === "deck" ? `http://localhost:8080/api/decks/${id}/flashcards` : (type === "root" ? `http://localhost:8080/api/content` : `http://localhost:8080/api/content/${id}`);
     //let fetchTagUrl = `http://localhost:8080/api/tags`;
@@ -133,9 +133,8 @@ export default function FileExplorer( {refreshKey, cards,onCreate} ) {
 
     return (
         <>
-            {mode === "cram" && <button onClick={() => setShowPrevCardsDropdown(!showPrevCardsDropdown)}>&lt;</button>}
             { (mode !== "cram" || showPrevCardsDropdown) && (
-            <ul className="overflow-y-auto w-screen p-4">
+            <ul className={`overflow-y-auto w-screen p-4  ${mode === "cram" ? "absolute inset-0 z-50 h-full" : ""}`}>
                 <li className="p-2">
                     <nav className="flex flex-row">
                         { (mode != "cram") && (

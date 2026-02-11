@@ -12,6 +12,7 @@ export default function Explorer() {
     const [selectedItem, setSelectedItem] = useState(null);
     const [refreshKey, setRefreshKey] = useState(0);
     const [inPlayCards, setInPlayCards] = useState([]);
+    const [showPrevCardsDropdown, setShowPrevCardsDropdown] = useState(false);
 
     const triggerRefresh = () => setRefreshKey(prev => prev + 1);
 
@@ -46,19 +47,21 @@ export default function Explorer() {
         }, [id, type, cardId]);
 
 
-    
+    function onMenu() {
+        setShowPrevCardsDropdown(!showPrevCardsDropdown);
+    }
 
     return (   
             <div className="grid grid-rows-[20%_1fr] h-screen justify-around w-screen">
-                <div className="bg-indigo-600 w-screen">
-                    {type !== "root" && <a onClick={ mode === "cram" ? () => navigate(`/explorer/preview/${type}/${id}`) : () => navigate(-1)}>Back</a>}
+                <div className="grad w-screen">
+                    {(type !== "root" && mode !== "cram")&& <a onClick={() => navigate(-1)}>Back</a>}
                     {mode === "preview" && <PreviewPanel item={selectedItem} />} 
                     {(mode === "edit" && type !== "root") && <EditPanel item={selectedItem}  onCardEdited={handleCardEdited} />} 
                     {(mode === "create" && type === "deck") && <CreatePanel onCardCreated={handleCardCreated} /> }
-                    {(mode === "cram" && !cardId)&& <CramMode setCardsDone={setInPlayCards}/>} 
+                    {(mode === "cram" && !cardId)&& <CramMode onMenu={onMenu} item={selectedItem} setCardsDone={setInPlayCards}/>} 
                 </div>
 
-                <FileExplorer  cards={inPlayCards} refreshKey={refreshKey} onCreate={triggerRefresh}/>
+                <FileExplorer  showPrevCardsDropdown={showPrevCardsDropdown} cards={inPlayCards} refreshKey={refreshKey} onCreate={triggerRefresh}/>
             </div>
     );    
 }
