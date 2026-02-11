@@ -28,10 +28,11 @@ export default function PreviewPanel( {item} ) {
     }
 
     return (
-        <div className="m-2 flex-1 flex flex-col items-center h-full">
-            <h2 className="self-start mb-2 mt-2 ml-1 overflow-hidden whitespace-nowrap w-19/20 cursor-pointer" onClick={ handleEdit}>{type !== "root" ? item.name : ''}</h2>
+        <div className="mx-6 mt-4 flex-1 flex flex-col items-center justify-center h-full gap-4">
+            <h2 className="self-start overflow-hidden whitespace-nowrap w-full cursor-pointer text-white" onClick={ handleEdit}>{type !== "root" ? item.name : ''}</h2>
             
-            <button className="bg-amber-500 w-4/10 m-2" onClick={ handlePlay }>Play</button>
+            <button className="px-10 py-3 text-white font-black uppercase tracking-widest rounded-full
+                   transition-all duration-100 active:scale-95 bg-linear-to-br from-amber-400 to-orange-500 hover:to-orange-600 hover:scale-105 shadow-lg shadow-black/30" onClick={ handlePlay }>Play</button>
         </div>
     );
 }
