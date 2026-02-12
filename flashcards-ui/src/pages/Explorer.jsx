@@ -3,6 +3,7 @@ import EditPanel from "../components/EditPanel";
 import CreatePanel from "../components/CreatePanel";
 import FileExplorer from "../components/FileExplorer";
 import CramMode from "../components/CramMode";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -52,9 +53,9 @@ export default function Explorer() {
     }
 
     return (   
-            <div className="grid grid-rows-[20%_1fr] h-screen justify-around w-screen">
-                <div className="grad w-screen">
-                    {(type !== "root" && mode !== "cram")&& <a onClick={() => navigate(-1)}>Back</a>}
+            <div className="overflow-y-auto grid grid-rows-[33%_1fr] h-screen justify-around w-screen grad">
+                <div className="">
+                    {(type !== "root" && mode !== "cram")&& <a className="cursor-pointer absolute left-4 top-4" onClick={() => navigate(-1)}><IoMdArrowRoundBack className="text-white" size={26}/></a>}
                     {mode === "preview" && <PreviewPanel item={selectedItem} />} 
                     {(mode === "edit" && type !== "root") && <EditPanel item={selectedItem}  onCardEdited={handleCardEdited} />} 
                     {(mode === "create" && type === "deck") && <CreatePanel onCardCreated={handleCardCreated} /> }

@@ -79,7 +79,7 @@ body {
 }
 
 .grad {
-  @apply bg-linear-to-br from-blue-500 via-indigo-500 to-purple-600 ;
+  @apply bg-linear-to-br from-blue-500 via-indigo-600 to-purple-600;
 }
 
 .grad-back {
@@ -112,5 +112,6 @@ body.cram-mode {
     opacity: 0;
     transition: all 0.5s ease-in;
   }
+
 }
 
