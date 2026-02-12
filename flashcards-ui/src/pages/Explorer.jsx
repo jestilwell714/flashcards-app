@@ -14,7 +14,7 @@ export default function Explorer() {
     const [refreshKey, setRefreshKey] = useState(0);
     const [inPlayCards, setInPlayCards] = useState([]);
     const [showPrevCardsDropdown, setShowPrevCardsDropdown] = useState(false);
-
+    
     const triggerRefresh = () => setRefreshKey(prev => prev + 1);
 
     function handleCardCreated() {
@@ -52,12 +52,16 @@ export default function Explorer() {
         setShowPrevCardsDropdown(!showPrevCardsDropdown);
     }
 
+    function handlePlay(url) {
+        navigate(url, { replace : true});
+    }
+
     return (   
-            <div className="overflow-y-auto grid grid-rows-[33vh_1fr] h-screen justify-around w-screen grad">
+            <div className="grad overflow-y-auto grid grid-rows-[33vh_1fr] h-screen justify-around w-screen">
                 <div className="">
                     {(type !== "root" && mode !== "cram")&& <a className="cursor-pointer absolute left-4 top-5" onClick={() => navigate(-1)}><IoMdArrowRoundBack className="text-white" size={26}/></a>}
-                    {mode === "preview" && <PreviewPanel item={selectedItem} />} 
-                    {(mode === "edit" && type !== "root") && <EditPanel item={selectedItem}  onCardEdited={handleCardEdited} />} 
+                    {mode === "preview" && <PreviewPanel item={selectedItem} handlePlay={handlePlay}/>} 
+                    {(mode === "edit" && type !== "root") && <EditPanel handlePlay={handlePlay} item={selectedItem}  onCardEdited={handleCardEdited} />} 
                     {(mode === "create" && type === "deck") && <CreatePanel onCardCreated={handleCardCreated} /> }
                     {(mode === "cram" && !cardId)&& <CramMode onMenu={onMenu} item={selectedItem} setCardsDone={setInPlayCards}/>} 
                 </div>

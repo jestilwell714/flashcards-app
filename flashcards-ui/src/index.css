@@ -42,9 +42,7 @@ button {
   cursor: pointer;
   transition: black 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
@@ -79,16 +77,14 @@ body {
 }
 
 .grad {
-  @apply bg-linear-to-br from-blue-500 via-indigo-600 to-purple-600;
+  @apply bg-linear-to-br from-blue-500 to-indigo-600 ;
 }
 
 .grad-back {
   @apply bg-linear-to-br from-blue-500 to-indigo-600;
 }
 
-body.cram-mode {
-    @apply bg-second;
-}
+
 }
 
 
