@@ -15,4 +15,7 @@ public class ItemDto {
     private Long id;
     private String name;
     private String type;
+    private Integer childFoldersSize;
+    private Integer childDecksSize;
+    private Integer flashcardsSize;
 }

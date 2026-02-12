@@ -177,11 +177,11 @@ public class FolderServiceImpl implements FolderService {
         List<ItemDto> list = new ArrayList<>();
 
         for(Folder f : folders) {
-            list.add(new ItemDto(f.getId(),f.getName(),"folder"));
+            list.add(new ItemDto(f.getId(),f.getName(),"folder",f.getChildFolders().size(), f.getDecks().size(),null));
         }
 
         for(Deck d : decks) {
-            list.add(new ItemDto(d.getId(),d.getName(),"deck"));
+            list.add(new ItemDto(d.getId(),d.getName(),"deck",null, null,d.getFlashcards().size()));
         }
 
         return list;
@@ -195,11 +195,11 @@ public class FolderServiceImpl implements FolderService {
         List<ItemDto> list = new ArrayList<>();
 
         for(Folder f : folders) {
-            list.add(new ItemDto(f.getId(),f.getName(),"folder"));
+            list.add(new ItemDto(f.getId(),f.getName(),"folder",f.getChildFolders().size(),f.getDecks().size(),null));
         }
 
         for(Deck d : decks) {
-            list.add(new ItemDto(d.getId(),d.getName(),"deck"));
+            list.add(new ItemDto(d.getId(),d.getName(),"deck",null,null,d.getFlashcards().size()));
         }
 
         return list;
