@@ -6,6 +6,7 @@ import { IoFolderOpenOutline } from "react-icons/io5";
 import { TbCards } from "react-icons/tb";
 import { FaPlus } from "react-icons/fa";
 import { IoMdPricetags } from "react-icons/io";
+import { HiX } from "react-icons/hi";
 
 export default function FileExplorer( {refreshKey, cards,onCreate, showPrevCardsDropdown} ) {
     const { type, id,mode } = useParams();
@@ -143,27 +144,11 @@ export default function FileExplorer( {refreshKey, cards,onCreate, showPrevCards
         <>
             { (mode !== "cram" || showPrevCardsDropdown) && (
             <ul className={` w-screen flex flex-col gap-4 p-4 ${mode === "cram" ? "absolute inset-0 z-50 h-full" : ""}`}>
-                <li className="flex flex-row bg-white/20 border-white/20 relative self-end border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 hover:bg-slate-800/40">
+                <li className="flex flex-row bg-white/20 border-white/20 relative self-baseline border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 hover:bg-slate-800/40">
                             <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" ><IoMdPricetags className="text-white" size={27}/></button>
-                            <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={() => setShowDropdown(!showDropdown)}><FaPlus className="text-white" size={25}/></button>
+                            <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={() => setShowDropdown(!showDropdown)}>{showDropdown ? <HiX className={`text-white`} size={27} strokeWidth={1.5}/>: <FaPlus className={`text-white`} size={25}/>}</button>
                             
-                            {showDropdown && (
-                                <ul>
-                                    {type !== "deck" ?
-                                    <>
-                                    <li onClick={() => handleCreate("folder")}>
-                                        <h4>Folder</h4>
-                                    </li>
-                                    <li onClick={() => handleCreate("deck")}>
-                                        <h4>Deck</h4>
-                                    </li>
-                                    </> :
-                                    <li onClick={() => handleCreate("flashcard")}>
-                                        <h4>flashcard</h4>
-                                    </li>
-                                    }
-                                </ul>
-                            ) }
+                            
                             
                            
                             { /** type === "deck" && <button onClick={() => setShowTagDropdown(!showTagDropdown)}>v</button>}
@@ -181,7 +166,26 @@ export default function FileExplorer( {refreshKey, cards,onCreate, showPrevCards
                             
                         </>
                         )*/}
+                        {showDropdown &&
+                              
+                                    (type !== "deck" ?
+                                    <>
+                                    <button className="m-1 p-1 hover:scale-[1.05] active:scale-95" onClick={() => handleCreate("folder")}>
+                                        <IoFolderOpenOutline className="text-white drop-shadow-[text-shadow:0.5px_0_0_white,-0.5px_0_0_white,0_0.5px_0_white,0_-0.5px_0_white]" size={27} />
+                                    </button>
+                                    <button className="m-1 p-1 hover:scale-[1.05] active:scale-95" onClick={() => handleCreate("deck")}>
+                                        <TbCards className="text-white " size={27} strokeWidth={3}/>
+                                    </button>
+                                    </> :
+                                    <li onClick={() => handleCreate("flashcard")}>
+                                        <h4>flashcard</h4>
+                                    </li>)
+                                    
+                      
+                            }
                 </li>
+                
+
                 {isCreate && 
                     <li className="bg-white/20 border-white/20 relative p-6 flex flex-row items-center cursor-pointer border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 h-32 hover:bg-slate-800/40">
                         {createType === "folder" && <IoFolderOpenOutline className="shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60} />}
