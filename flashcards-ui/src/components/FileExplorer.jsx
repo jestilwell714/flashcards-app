@@ -188,8 +188,8 @@ export default function FileExplorer( {refreshKey, cards,onCreate, showPrevCards
 
                         <div className="flex-1 min-w-0">
                             <h3 className={`${!item.type ? "w-66 break-words overflow-y-hidden" : "truncate"} self-baseline text-white font-bold text-lg leading-tight`}>{item.type == null ? item.question : item.name}</h3>
-                            {item.type && <p>{(item.childFoldersSize !== null) && <span className="mx-2  text-rose-600 text-sm font-bold leading-tight">{item.childFoldersSize} folder{item.childFoldersSize !== 1 ? "s" : ""}</span>} 
-                            {(item.childDecksSize !== null) && <span className=" mx-2 text-cyan-300 text-sm font-bold leading-tight">{item.childDecksSize} deck{item.childDecksSize !== 1 ? "s" : ""}</span>}
+                            {item.type && <p>{(item.childFoldersSize !== null) && <span className="mx-2 text-rose-600 text-sm font-bold leading-tight">{item.childFoldersSize} folder{item.childFoldersSize !== 1 ? "s" : ""}</span>} 
+                            {(item.childDecksSize !== null) && <span className= "mx-2 text-cyan-300 text-sm font-bold leading-tight">{item.childDecksSize} deck{item.childDecksSize !== 1 ? "s" : ""}</span>}
                             {(item.flashcardsSize !== null) && <span className=" mx-2 text-yellow-300 text-sm font-bold leading-tight">{item.flashcardsSize} flashcard{item.flashcardsSize !== 1 ? "s" : ""}</span>}</p> }
                         </div>
                         <button className="absolute bottom-4 right-4 flex items-center justidy-center" onClick={(e) => handleDelete(e,item) }><FaRegTrashAlt className="text-red-600/90 hover:text-red-600 hover:scale-110 active:scale-90" size={22}/></button>
