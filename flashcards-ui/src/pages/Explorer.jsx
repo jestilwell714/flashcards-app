@@ -12,8 +12,6 @@ export default function Explorer() {
     const navigate = useNavigate();
     const [selectedItem, setSelectedItem] = useState(null);
     const [refreshKey, setRefreshKey] = useState(0);
-    const [inPlayCards, setInPlayCards] = useState([]);
-    const [showPrevCardsDropdown, setShowPrevCardsDropdown] = useState(false);
     
     const triggerRefresh = () => setRefreshKey(prev => prev + 1);
 
@@ -47,11 +45,6 @@ export default function Explorer() {
     }
         }, [id, type, cardId]);
 
-
-    function onMenu() {
-        setShowPrevCardsDropdown(!showPrevCardsDropdown);
-    }
-
     function handlePlay(url) {
         navigate(url, { replace : true});
     }
@@ -63,10 +56,10 @@ export default function Explorer() {
                     {mode === "preview" && <PreviewPanel item={selectedItem} handlePlay={handlePlay}/>} 
                     {(mode === "edit" && type !== "root") && <EditPanel handlePlay={handlePlay} item={selectedItem}  onCardEdited={handleCardEdited} />} 
                     {(mode === "create" && type === "deck") && <CreatePanel onCardCreated={handleCardCreated} /> }
-                    {(mode === "cram" && !cardId)&& <CramMode onMenu={onMenu} item={selectedItem} setCardsDone={setInPlayCards}/>} 
+                    {(mode === "cram" && !cardId)&& <CramMode item={selectedItem}/>} 
                 </div>
 
-                <FileExplorer  showPrevCardsDropdown={showPrevCardsDropdown} cards={inPlayCards} refreshKey={refreshKey} onCreate={triggerRefresh}/>
+                <FileExplorer refreshKey={refreshKey} onCreate={triggerRefresh}/>
             </div>
     );    
 }

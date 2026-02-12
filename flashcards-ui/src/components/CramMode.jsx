@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import FlashCard from './FlashCard';
 import { useNavigate, useParams } from 'react-router-dom';
 import FeedBackControls from './FeedBackControls';
@@ -6,7 +6,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
 
 
-export default function CramMode({setCardsDone, item, onMenu}) {
+export default function CramMode({item}) {
     const {type, id} = useParams();
     const [cards,setCards] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,10 +42,6 @@ export default function CramMode({setCardsDone, item, onMenu}) {
         });
     };
 
-    useEffect(() => {
-        setCardsDone([]);
-    }, [setCardsDone]);
-
     function newCard() {
         if(currentIndex >= cards.length - 2) {
             fetchMoreCards();
@@ -64,8 +60,6 @@ export default function CramMode({setCardsDone, item, onMenu}) {
         })
         .then(response => {
             if (!response.ok) console.error("Database didn't update the score");
-            setCardsDone((prev) => [card,...prev]);
-
             newCard();
             setFlipped(false);
         })
@@ -87,12 +81,12 @@ export default function CramMode({setCardsDone, item, onMenu}) {
     const cardId = card.id;
 
     return (
-        <div className="grad-back h-screen w-full flex flex-col content-between items-center justify-between gap-4">
+        <div className="grad-back h-screen w-screen flex flex-col content-between items-center justify-between gap-4">
         
             <nav className="flex flex-row items-center justify-between h-24 w-full p-4">
                 <a className="z-99 cursor-pointer" onClick={() => navigate(`/explorer/preview/${type}/${id}`, {replace : true} )}><IoMdArrowRoundBack className="text-white" size={26}/></a>
-                {type != "root" && <h2 className="text-white tracking-wide">{ item.name}</h2>}
-                <button className="z-99" onClick={() => onMenu()}><IoMenu className="text-white" size={28}/></button>
+                {type != "root" && <h2 className=" mx-5 text-3xl text-bold truncate text-white">{ item.name}</h2>}
+                <h3 className="w-6 text-white text-xl font-bold">{currentIndex}</h3>
             </nav>
 
             <FlashCard 
