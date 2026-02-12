@@ -4,6 +4,8 @@ import CreateDeckOrFolder from "./CreateDeckOrFolder";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IoFolderOpenOutline } from "react-icons/io5";
 import { TbCards } from "react-icons/tb";
+import { FaPlus } from "react-icons/fa";
+import { IoMdPricetags } from "react-icons/io";
 
 export default function FileExplorer( {refreshKey, cards,onCreate, showPrevCardsDropdown} ) {
     const { type, id,mode } = useParams();
@@ -137,15 +139,12 @@ export default function FileExplorer( {refreshKey, cards,onCreate, showPrevCards
         <>
             { (mode !== "cram" || showPrevCardsDropdown) && (
             <ul className={` w-screen flex flex-col gap-4 p-4 ${mode === "cram" ? "absolute inset-0 z-50 h-full" : ""}`}>
-                <li className="">
-                    <nav className="flex flex-row">
-                        { /** (mode != "cram") && (
-                        
-                        <>
-                            <input placeholder="Search"></input>
-                            <button onClick={() => setShowDropdown(!showDropdown)}>+</button>
+                <li className="flex flex-row bg-white/20 border-white/20 relative self-end border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 hover:bg-slate-800/40">
+                            <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" ><IoMdPricetags className="text-white" size={27}/></button>
+                            <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={() => setShowDropdown(!showDropdown)}><FaPlus className="text-white" size={25}/></button>
+                            
                             {showDropdown && (
-                                <ul>/**
+                                <ul>
                                     {type !== "deck" ?
                                     <>
                                     <li onClick={() => handleCreate("folder")}>
@@ -161,8 +160,9 @@ export default function FileExplorer( {refreshKey, cards,onCreate, showPrevCards
                                     }
                                 </ul>
                             ) }
+                            
                            
-                            {type === "deck" && <button onClick={() => setShowTagDropdown(!showTagDropdown)}>v</button>}
+                            { /** type === "deck" && <button onClick={() => setShowTagDropdown(!showTagDropdown)}>v</button>}
                             {showTagDropdown && 
                                 <ul>
                                     <li>All Tags</li>
@@ -177,7 +177,6 @@ export default function FileExplorer( {refreshKey, cards,onCreate, showPrevCards
                             
                         </>
                         )*/}
-                    </nav>
                 </li>
                 {isCreate ? <CreateDeckOrFolder parentId={type === "root" ? null : id} initialData={null} type={createType} onSubmit={handleSubmit}/> : ''}
                 
