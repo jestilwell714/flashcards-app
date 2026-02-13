@@ -81,7 +81,7 @@ export default function CramMode({item}) {
             setTimeout(() => {
                 navigate(`/explorer/preview/${type}/${id}`, {replace : true});
             }, 3000);
-            return <div className="text-center flex flex-col content-center h-screen w-screen py-32 px-4">
+            return <div className="text-center flex flex-col content-center h-dvh w-screen py-32 px-4">
                         <p className="text-white mt-4 font-bold uppercase tracking-widest text-xl">This directory contains no FlashCards</p>
                         <p className="text-white mt-4 font-bold uppercase tracking-widest text-xl">Please add FlashCards</p>
                         <LoadingSpinner /><p className="text-white font-medium">You are being redirected</p>
@@ -99,7 +99,7 @@ export default function CramMode({item}) {
     const cardId = card.id;
 
     return (
-        <div className="grad-back h-screen w-screen flex flex-col content-between items-center justify-between gap-4">
+        <div className="grad-back h-dvh w-screen flex flex-col content-between items-center justify-between gap-4">
         
             <nav className="flex flex-row items-center justify-between h-24 w-full p-4">
                 <a className="z-99 cursor-pointer" onClick={() => navigate(`/explorer/preview/${type}/${id}`, {replace : true} )}><IoMdArrowRoundBack className="text-white" size={26}/></a>

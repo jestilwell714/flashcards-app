@@ -57,7 +57,7 @@ export default function Explorer() {
     
 
     return (   
-            <div className="grad overflow-y-auto grid grid-rows-[33vh_1fr] h-screen justify-around w-screen">
+            <div className="grad overflow-y-auto grid grid-rows-[33vh_1fr] h-dvh justify-around w-screen">
                 <div className="relative">
                     {(type !== "root" && mode !== "cram" && !tagMode)&& <a className="cursor-pointer absolute  left-4 top-5" onClick={() => navigate(-1)}><IoMdArrowRoundBack className="text-white hover:scale-[1.05] active:scale-95" size={26}/></a>}
                     {mode === "preview" && <PreviewPanel item={selectedItem} handlePlay={handlePlay}/>} 

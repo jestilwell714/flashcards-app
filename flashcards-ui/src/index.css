@@ -27,7 +27,6 @@ body {
   display: flex;
   place-items: center;
   min-width: 320px;
-  min-height: 100vh;
 }
 
 h1 {
@@ -61,7 +60,7 @@ h2 {
 }
 
 body {
-  @apply bg-main text-text;
+  @apply bg-main text-text h-dvh;
 }
 
 .grad {
