@@ -10,14 +10,14 @@ import { IoMdPricetags } from "react-icons/io";
 import { HiX } from "react-icons/hi";
 import { TbTag } from "react-icons/tb";
 
-export default function FileExplorer( {refreshKey, onCreate} ) {
+export default function FileExplorer( {refreshKey, onCreate, tagMode, setTagMode} ) {
     const { type, id,mode } = useParams();
     const [content,setContent] = useState([]);
     const [tags, setTags] = useState([]);
     const [isCreate, setIsCreate] = useState(false);
     const [createType, setCreateType] = useState(null);
     const [showDropdown, setShowDropdown] = useState(false);
-    const [tagMode, setTagMode] = useState(false);
+    
     const fetchContentsUrl = type === "deck" ? `${API_BASE_URL}/api/decks/${id}/flashcards` : (type === "root" ? `${API_BASE_URL}/api/content` : `${API_BASE_URL}/api/content/${id}`);
     const fetchTagUrl = `${API_BASE_URL}/api/tags`;
 
@@ -143,12 +143,12 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
 
     function handleTagMode() {
         setTagMode(!tagMode);
-        if(type == "tag") {
-            navigate(-1);
+        if(!tagMode) {
+            navigate(`/explorer/${mode}/${type}/${id}`);
         } else {
-            navigate(`/explorer/${mode}/${type}/${id}`)
+            navigate(-1);
         }
-
+    
     }
 
     return (
