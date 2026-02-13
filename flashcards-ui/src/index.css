@@ -37,8 +37,8 @@ h1 {
 
 button {
   border-radius: 8px;
-
   font-family: inherit;
+  background-color: transparent;
   cursor: pointer;
   transition: black 0.25s;
 }
@@ -48,18 +48,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
 
 @theme {
   --color-main: #F2F2F2; 
