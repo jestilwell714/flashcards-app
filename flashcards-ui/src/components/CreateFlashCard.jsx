@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+import { FaCheck } from "react-icons/fa";
 
 export default function CreateFlashCard({ onSubmit }) {
     const { id, cardId,mode } = useParams();
@@ -45,22 +45,37 @@ export default function CreateFlashCard({ onSubmit }) {
     }
 
     return (
+        
         <div>
-        <form onSubmit={handleSubmit}>
-            <label>Front</label>
+        <form onSubmit={handleSubmit} className="relative flex flex-col items-center  gap-4 ">
+            <div className=" border-gray-200          
+            rounded-3xl               
+            shadow-2xl                 
+            border mt-8 p-4
+            bg-main ">
+            <div className="w-66% flex flex-col gap-2">
+            <label className="text-black font-bold text-lg leading-tight ">Front</label>
             <textarea 
                 name="question"
                 value={formData.question}
                 onChange={handleChange}
+                rows={3}
+                className="text-black leading-tight outline-none border-none resize-none"
             />
+            </div>
 
-            <label>Back</label>
+            <div className="w-66% flex flex-col gap-2">
+            <label className=" text-black font-bold text-lg leading-tight">Back</label>
             <textarea
                 name="answer"
                 value={formData.answer}
                 onChange={handleChange}
+                rows={4}
+                className="text-black leading-tight outline-none border-none resize-none"
             />
-            <button type="submit">{isEdit ? "Edit" : "Create"}</button>
+            </div>
+            </div>
+            <button className="absolute right-4.5 top-4.5 p-1 cursor-pointer transition-all hover:scale-[1.05] active:scale-95 " type="submit"><FaCheck className="text-white" size={20}/></button>
         </form>
         </div>
     )

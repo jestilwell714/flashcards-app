@@ -155,12 +155,12 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
             <ul className={` w-screen flex flex-col gap-4 p-4 ${mode === "cram" ? "absolute inset-0 z-50 h-full" : ""}`}>
                 <li className="flex flex-row bg-white/20 border-white/20 relative self-baseline border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 hover:bg-slate-800/40">
                             <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={handleTagMode}><IoMdPricetags className="text-white" size={27}/></button>
-                            <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={() => tagMode ? handleCreate("tag"): setShowDropdown(!showDropdown)}>{showDropdown ? <HiX className={`text-white`} size={27} strokeWidth={1.5}/>: <FaPlus className={`text-white`} size={25}/>}</button>
+                            <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={() => tagMode ? handleCreate("tag") : type === "deck" ? handleCreate("flashcard") : setShowDropdown(!showDropdown)}>{showDropdown ? <HiX className={`text-white`} size={27} strokeWidth={1.5}/>: <FaPlus className={`text-white`} size={25}/>}</button>
                             
                             
                         {showDropdown &&
                               
-                                    (type !== "deck" ?
+                                    (type !== "deck" &&
                                     <>
                                     <button className="m-1 p-1 hover:scale-[1.05] active:scale-95" onClick={() => handleCreate("folder")}>
                                         <IoFolderOpenOutline className="text-white drop-shadow-[text-shadow:0.5px_0_0_white,-0.5px_0_0_white,0_0.5px_0_white,0_-0.5px_0_white]" size={27} />
@@ -168,10 +168,8 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
                                     <button className="m-1 p-1 hover:scale-[1.05] active:scale-95" onClick={() => handleCreate("deck")}>
                                         <TbCards className="text-white " size={27} strokeWidth={3}/>
                                     </button>
-                                    </> :
-                                    <li onClick={() => handleCreate("flashcard")}>
-                                        <h4>flashcard</h4>
-                                    </li>)
+                                    </> )
+                                    
                                     
                       
                             }
