@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaRegEdit } from "react-icons/fa";
+import { API_BASE_URL } from "../config"; 
 
 export default function PreviewPanel( {item, handlePlay} ) { 
     const navigate = useNavigate();

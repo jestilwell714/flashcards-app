@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config"; 
 import PreviewPanel from "../components/PreviewPanel";
 import EditPanel from "../components/EditPanel";
 import CreatePanel from "../components/CreatePanel";
@@ -32,7 +33,7 @@ export default function Explorer() {
 
     useEffect(() => {
         if (id && type && type !== "root") {
-       fetch( `http://localhost:8080/api/${type}s/${id}`, {
+       fetch( `${API_BASE_URL}/api/${type}s/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-User-ID': '1'

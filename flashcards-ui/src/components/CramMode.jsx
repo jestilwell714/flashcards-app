@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config"; 
 import { useState } from 'react';
 import FlashCard from './FlashCard';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -14,8 +15,8 @@ export default function CramMode({item}) {
     const [isFlipped, setFlipped] = useState(false);
     const navigate = useNavigate();
 
-    const fetchMoreCardsUrl = type === "root" ? `http://localhost:8080/api/cram` : `http://localhost:8080/api/cram/${type}/${id}`;
-    const submitScoreUrl = 'http://localhost:8080/api/flashcard';
+    const fetchMoreCardsUrl = type === "root" ? `${API_BASE_URL}/api/cram` : `${API_BASE_URL}/api/cram/${type}/${id}`;
+    const submitScoreUrl = `${API_BASE_URL}/api/flashcard`;
 
     const card = cards[currentIndex];
 

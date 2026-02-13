@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { API_BASE_URL } from "../config"; 
 
 export default function CreateDeckFolderOrTag( {parentId, type, initialData, onSubmit, onBlur, handlePlay} ) {
     const params = useParams();
@@ -8,7 +9,7 @@ export default function CreateDeckFolderOrTag( {parentId, type, initialData, onS
     if(isEdit) {
         type = params.type;
     }
-    const createUrl = `http://localhost:8080/api/${type}s`;
+    const createUrl = `${API_BASE_URL}/api/${type}s`;
 
     const url = isEdit ?  createUrl+'/'+ initialData.id : createUrl;
     const defaultData = type === "tag" ? {name: ''} : type === "folder" 

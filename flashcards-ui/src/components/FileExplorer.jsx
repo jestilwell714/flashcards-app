@@ -1,3 +1,4 @@
+import { API_BASE_URL } from "../config"; 
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import CreateDeckOrFolder from "./CreateDeckFolderOrTag";
@@ -17,8 +18,8 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
     const [createType, setCreateType] = useState(null);
     const [showDropdown, setShowDropdown] = useState(false);
     const [tagMode, setTagMode] = useState(false);
-    const fetchContentsUrl = type === "deck" ? `http://localhost:8080/api/decks/${id}/flashcards` : (type === "root" ? `http://localhost:8080/api/content` : `http://localhost:8080/api/content/${id}`);
-    const fetchTagUrl = `http://localhost:8080/api/tags`;
+    const fetchContentsUrl = type === "deck" ? `${API_BASE_URL}/api/decks/${id}/flashcards` : (type === "root" ? `${API_BASE_URL}/api/content` : `${API_BASE_URL}/api/content/${id}`);
+    const fetchTagUrl = `${API_BASE_URL}/api/tags`;
 
     useEffect(() => {
         fetch(fetchContentsUrl, {
@@ -126,7 +127,7 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
 
     const executeDelete = (itemId, itemType) => {
         
-        fetch(`http://localhost:8080/api/${itemType}s/${itemId}`, {
+        fetch(`${API_BASE_URL}/api/${itemType}s/${itemId}`, {
         method: 'DELETE',
         headers: {
             'X-User-ID': '1'

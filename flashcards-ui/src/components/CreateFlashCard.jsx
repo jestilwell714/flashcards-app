@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
+import { API_BASE_URL } from "../config"; 
 
 export default function CreateFlashCard({ onSubmit }) {
     const { id, cardId,mode } = useParams();
     const isEdit = mode == "edit";
     const [formData, setFormData] = useState({ question: '', answer: ''});
-    const url = isEdit ? `http://localhost:8080/api/flashcards/${formData.id}` : `http://localhost:8080/api/decks/${id}/flashcards`;
+    const url = isEdit ? `${API_BASE_URL}/api/flashcards/${formData.id}` : `${API_BASE_URL}/api/decks/${id}/flashcards`;
 
     useEffect(() => {
             if(isEdit) {
-           fetch(`http://localhost:8080/api/flashcards/${cardId}`,  {
+           fetch(`${API_BASE_URL}/api/flashcards/${cardId}`,  {
                 headers: {
                     'Content-Type': 'application/json',
                     'X-User-ID': '1'
