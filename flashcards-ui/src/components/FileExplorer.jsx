@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
-import CreateDeckOrFolder from "./CreateDeckOrFolder";
+import CreateDeckOrFolder from "./CreateDeckFolderOrTag";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { IoFolderOpenOutline } from "react-icons/io5";
 import { TbCards } from "react-icons/tb";
