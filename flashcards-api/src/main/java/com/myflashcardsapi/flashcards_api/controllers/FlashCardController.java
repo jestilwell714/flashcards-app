@@ -83,9 +83,9 @@ public class FlashCardController {
     }
 
 
-    @GetMapping("/cram/tags/{tagsId}")
-    public List<FlashCardDto> getCramByTagsId(@RequestHeader("X-User-ID") Long userId, @PathVariable List<Long> tagsId) throws BadRequestException {
-        return flashCardService.getFlashCardsForCramByTagsId(userId,tagsId);
+    @GetMapping("/cram/tag/{tagId}")
+    public List<FlashCardDto> getCramByTagId(@RequestHeader("X-User-ID") Long userId, @PathVariable Long tagId) throws BadRequestException {
+        return flashCardService.getFlashCardsForCramByTagId(userId,tagId);
     }
 
     @GetMapping("/cram")

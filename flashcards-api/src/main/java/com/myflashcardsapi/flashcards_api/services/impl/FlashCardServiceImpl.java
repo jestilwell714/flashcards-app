@@ -189,8 +189,8 @@ public class FlashCardServiceImpl implements FlashCardService {
     }
 
     @Override
-    public List<FlashCardDto> getFlashCardsForCramByTagsId(Long userId, List<Long> tagsId) throws BadRequestException {
-        List<FlashCardDto> flashCardDtoList = getFlashCardsByTagsIdAndUser(tagsId,userId);
+    public List<FlashCardDto> getFlashCardsForCramByTagId(Long userId, Long tagId) throws BadRequestException {
+        List<FlashCardDto> flashCardDtoList = getFlashCardsByTagsIdAndUser(List.of(tagId),userId);
         return studyEngineService.getCardBatchForCramMode(flashCardDtoList);
     }
 
