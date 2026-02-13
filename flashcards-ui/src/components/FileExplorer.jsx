@@ -181,6 +181,7 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
                     <li className="bg-white/20 border-white/20 relative p-6 flex flex-row items-center cursor-pointer border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 h-32 hover:bg-slate-800/40">
                         {createType === "folder" && <IoFolderOpenOutline className="shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60} />}
                         {createType === "deck" && <TbCards className="shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60} />}
+                        {tagMode && <TbTag className="scale-x-[-1] shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60}/>}
                         <CreateDeckOrFolder parentId={type === "root" ? null : id} initialData={null} type={createType} onSubmit={handleSubmit} onBlur={handleBlur}/> 
                     </li> 
                 }
