@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import FeedBackControls from './FeedBackControls';
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { IoMenu } from "react-icons/io5";
+import LoadingSpinner from "./LoadingSpinner";
 
 
 export default function CramMode({item}) {
@@ -72,7 +73,7 @@ export default function CramMode({item}) {
   
     if (cards.length === 0 || !card) {
         fetchMoreCards();
-        return <div className="text-center p-10">Loading deck...</div>;
+        return <div className="text-center p-10"><LoadingSpinner /><p className="text-white mt-4 font-medium">Loading your flashcards...</p></div>;
     }
 
 
