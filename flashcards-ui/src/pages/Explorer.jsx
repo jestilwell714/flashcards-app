@@ -13,7 +13,7 @@ export default function Explorer() {
     const navigate = useNavigate();
     const [selectedItem, setSelectedItem] = useState(null);
     const [refreshKey, setRefreshKey] = useState(0);
-    
+
     const triggerRefresh = () => setRefreshKey(prev => prev + 1);
 
     function handleCardCreated() {
@@ -32,8 +32,12 @@ export default function Explorer() {
     }
 
     useEffect(() => {
-        if (id && type && type !== "root") {
-       fetch( `${API_BASE_URL}/api/${type}s/${id}`, {
+        if(type == "root") {
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+            setSelectedItem("root");
+        }
+        else if (id && type) { 
+        fetch( `${API_BASE_URL}/api/${type}s/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'X-User-ID': '1'
@@ -43,12 +47,14 @@ export default function Explorer() {
         .then(data => {
             setSelectedItem(data);
         }).catch(err => console.error("Fetch failed:", err));
-    }
+    }   
         }, [id, type, cardId]);
 
     function handlePlay(url) {
         navigate(url, { replace : true});
     }
+
+    
 
     return (   
             <div className="grad overflow-y-auto grid grid-rows-[33vh_1fr] h-screen justify-around w-screen">

@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { FaRegEdit } from "react-icons/fa";
-import { API_BASE_URL } from "../config"; 
+import LoadingSpinner from './LoadingSpinner';
 
 export default function PreviewPanel( {item, handlePlay} ) { 
     const navigate = useNavigate();
@@ -8,9 +8,7 @@ export default function PreviewPanel( {item, handlePlay} ) {
 
     if(!item && type != "root") {
         return (
-            <div className="flex items-center justify-center p-12 text-react-cyan animate-pulse">
-                Loading Details...
-            </div>
+            <div></div>
         );
     }   
     const cramModeUrl = type === "root" ? '/explorer/cram/root/0' : `/explorer/cram/${type}/${item.id}`;
