@@ -24,7 +24,7 @@ public class TagDto {
 
     private String name;
 
-    private Long user;
+    private Long userId;
 
     private List<Long> flashCardIds;
 }
