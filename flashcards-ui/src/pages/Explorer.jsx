@@ -59,7 +59,7 @@ export default function Explorer() {
                     {(mode === "cram" && !cardId)&& <CramMode item={selectedItem}/>} 
                 </div>
 
-                <FileExplorer refreshKey={refreshKey} onCreate={triggerRefresh}/>
+                {mode !== "cram" && <FileExplorer refreshKey={refreshKey} onCreate={triggerRefresh}/>}
             </div>
     );    
 }
