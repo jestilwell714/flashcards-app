@@ -13,7 +13,9 @@ export default function CramMode({item}) {
     const [cards,setCards] = useState([]);
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(false);
+    const [isFinished, setIsFinished] = useState(false);
     const [isFlipped, setFlipped] = useState(false);
+    
     const navigate = useNavigate();
 
     const fetchMoreCardsUrl = type === "root" ? `${API_BASE_URL}/api/cram` : `${API_BASE_URL}/api/cram/${type}/${id}`;
@@ -22,7 +24,7 @@ export default function CramMode({item}) {
     const card = cards[currentIndex];
 
     const fetchMoreCards = () => {
-        if (isLoading) return;
+        if (isLoading|| isFinished) return;
         setIsLoading(true);
         fetch(fetchMoreCardsUrl, {
             headers: {
@@ -34,9 +36,12 @@ export default function CramMode({item}) {
             return response.json();
         })
         .then((newCards) => {
-            setCards((prevDeck) => [...prevDeck, ...newCards]);
-            setIsLoading(false);
-
+            if(newCards.length > 0) {
+                setCards((prevDeck) => [...prevDeck, ...newCards]);
+                setIsLoading(false);
+            } else {
+                setIsFinished(true);
+            }
         })
         .catch((error) => {
             console.error('Error fetching more cards:', error);
@@ -72,8 +77,19 @@ export default function CramMode({item}) {
 
   
     if (cards.length === 0 || !card) {
-        fetchMoreCards();
-        return <div className="text-center p-10"><LoadingSpinner /><p className="text-white mt-4 font-medium">Loading your flashcards...</p></div>;
+        if(isFinished) {
+            setTimeout(() => {
+                navigate(`/explorer/preview/${type}/${id}`, {replace : true});
+            }, 3000);
+            return <div className="text-center flex flex-col content-center h-screen w-screen py-32 px-4">
+                        <p className="text-white mt-4 font-bold uppercase tracking-widest text-xl">This directory contains no FlashCards</p>
+                        <p className="text-white mt-4 font-bold uppercase tracking-widest text-xl">Please add FlashCards</p>
+                        <LoadingSpinner /><p className="text-white font-medium">You are being redirected</p>
+                    </div>
+        } else {
+            fetchMoreCards();
+            return <div className="text-center p-10"><LoadingSpinner /><p className="text-white mt-4 font-medium">Loading your flashcards...</p></div>;
+        }
     }
 
 
