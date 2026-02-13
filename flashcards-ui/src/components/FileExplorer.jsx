@@ -86,7 +86,9 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
     const navigate = useNavigate();
 
     function handleClick(item) {
-        if(item.type == undefined) { 
+        if(tagMode) {
+            navigate(`/explorer/preview/tag/${item.id}`, {replace : true});
+        } else if(item.type == undefined) { 
             navigate(`/explorer/edit/${type}/${id}/card/${item.id}`);
         } else {
             navigate(`/explorer/preview/${item.type}/${item.id}`);
@@ -115,7 +117,7 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
     function handleDelete(e,item) {
         e.stopPropagation();
         const itemType = tagMode ? "tag" : item.type || "flashcard";
-        const confirmed = window.confirm(`Are you sure you want to delete this ${item.type}?`);
+        const confirmed = window.confirm(`Are you sure you want to delete this ${itemType}?`);
 
         if (confirmed) {
             executeDelete(item.id, itemType);
@@ -138,13 +140,22 @@ export default function FileExplorer( {refreshKey, onCreate} ) {
         .catch(err => console.error("Delete error:", err));
         }
 
+    function handleTagMode() {
+        setTagMode(!tagMode);
+        if(type == "tag") {
+            navigate(-1);
+        } else {
+            navigate(`/explorer/${mode}/${type}/${id}`)
+        }
+
+    }
 
     return (
         <>
             <ul className={` w-screen flex flex-col gap-4 p-4 ${mode === "cram" ? "absolute inset-0 z-50 h-full" : ""}`}>
                 <li className="flex flex-row bg-white/20 border-white/20 relative self-baseline border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 hover:bg-slate-800/40">
-                            <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={() => setTagMode(!tagMode)}><IoMdPricetags className="text-white" size={27}/></button>
-                            <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={() => setShowDropdown(!showDropdown)}>{showDropdown ? <HiX className={`text-white`} size={27} strokeWidth={1.5}/>: <FaPlus className={`text-white`} size={25}/>}</button>
+                            <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={handleTagMode}><IoMdPricetags className="text-white" size={27}/></button>
+                            <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={() => tagMode ? handleCreate("tag"): setShowDropdown(!showDropdown)}>{showDropdown ? <HiX className={`text-white`} size={27} strokeWidth={1.5}/>: <FaPlus className={`text-white`} size={25}/>}</button>
                             
                             
                         {showDropdown &&
