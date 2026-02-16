@@ -29,10 +29,6 @@ body {
   min-width: 320px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
 
 button {
   border-radius: 8px;
@@ -56,7 +52,7 @@ button:focus-visible {
 
 @layer base {
 h2 {
-  @apply text-3xl text-text font-medium;
+  @apply text-3xl lg:text-4xl text-text font-medium;
 }
 
 body {
@@ -89,12 +85,5 @@ body {
   .rotate-y-180 {
     transform: rotateY(180deg);
   }
-
-  .shoot-off-left {
-    transform: translateX(-150vw) rotate(-20deg);
-    opacity: 0;
-    transition: all 0.5s ease-in;
-  }
-
 }
 

@@ -152,9 +152,9 @@ export default function FileExplorer( {refreshKey, onCreate, tagMode, setTagMode
     }
 
     return (
-        <>
-            <ul className={` w-screen flex flex-col gap-4 p-4 ${mode === "cram" ? "absolute inset-0 z-50 h-full" : ""}`}>
-                <li className="flex flex-row bg-white/20 border-white/20 relative self-baseline border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 hover:bg-slate-800/40">
+        <div className="">
+            <ul className={` flex flex-col content-center gap-4 w-full  p-4 ${mode === "cram" ? "absolute inset-0 z-50 h-full" : ""}`}>
+                <li className="flex min-w-27 flex-row bg-white/20 border-white/20 relative self-baseline border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 hover:bg-slate-800/40">
                             <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={handleTagMode}><IoMdPricetags className="text-white" size={27}/></button>
                             <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={() => tagMode ? handleCreate("tag") : type === "deck" ? handleCreate("flashcard") : setShowDropdown(!showDropdown)}>{showDropdown ? <HiX className={`text-white`} size={27} strokeWidth={1.5}/>: <FaPlus className={`text-white`} size={25}/>}</button>
                             
@@ -186,8 +186,9 @@ export default function FileExplorer( {refreshKey, onCreate, tagMode, setTagMode
                     </li> 
                 }
                 
+                <ul className="grid-cols-1 gap-4 content-center grid md:grid-cols-2">
                 {(tagMode ? tags : content).map((item) => (
-                    <li className="bg-white/20 border-white/20 relative p-6 flex flex-row items-center cursor-pointer border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 h-32 hover:bg-slate-800/40" key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
+                    <li className="md:w-90 lg:w-110 xl:min-w-1 bg-white/20 border-white/20 relative p-6 flex flex-row items-center cursor-pointer border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 h-32 hover:bg-slate-800/40" key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
                         {item.type === "folder" && <IoFolderOpenOutline className="shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60} />}
                         {item.type === "deck" && <TbCards className="shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60} />}
                         {tagMode && <TbTag className="scale-x-[-1] shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60}/>}
@@ -201,8 +202,9 @@ export default function FileExplorer( {refreshKey, onCreate, tagMode, setTagMode
                     
                     </li>
                 ))}
+                </ul>
             </ul>
-            </>
+            </div>
         )
         
 }
