@@ -99,12 +99,12 @@ export default function CramMode({item}) {
     const cardId = card.id;
 
     return (
-        <div className="grad-back h-dvh w-screen flex flex-col content-between items-center justify-between gap-4">
+        <div className="h-dvh w-screen flex flex-col content-between items-center justify-between gap-4">
         
-            <nav className="flex flex-row items-center justify-between h-24 w-full p-4">
+            <nav className="flex flex-row items-center justify-between w-full p-4">
                 <a className="z-99 cursor-pointer" onClick={() => navigate(`/explorer/preview/${type}/${id}`, {replace : true} )}><IoMdArrowRoundBack className="text-white" size={26}/></a>
                 {type != "root" && <h2 className=" mx-5 text-3xl text-bold truncate text-white">{ item.name}</h2>}
-                <h3 className="w-6 text-white text-xl font-bold">{currentIndex}</h3>
+                <h3 className="min-w-6 text-white text-xl font-bold">{currentIndex}</h3>
             </nav>
 
             <FlashCard 
@@ -115,7 +115,7 @@ export default function CramMode({item}) {
                 setFlipped={setFlipped}
             />
 
-            <div className="h-32">
+            <div>
             { isFlipped &&
                 <FeedBackControls onScore={submitScore}/>
             }
