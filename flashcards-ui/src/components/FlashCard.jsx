@@ -1,9 +1,8 @@
 
 function BackSide({answer}) {
     return (
-        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-3xl shadow-2xl flex p-4 bg-main ">
-            <h2 className="select-none whitespace-normal
-            wrap-break-words">{answer}</h2>
+        <div className="absolute inset-0 backface-hidden rotate-y-180 rounded-3xl w-full shadow-2xl flex p-4 bg-main">
+            <h2 className="select-none w-full whitespace-normal break-words overflow-y-auto">{answer}</h2>
         </div>
     );
 }
@@ -11,9 +10,9 @@ function BackSide({answer}) {
 
 function FrontSide({question}) {
     return (
-        <div className="absolute inset-0 backface-hidden rounded-3xl shadow-2xl flex p-4 bg-main ">
-            <h2 className="select-none whitespace-normal
-            wrap-break-words">{question}</h2>
+        <div className="absolute inset-0 backface-hidden rounded-3xl shadow-2xl w-full flex p-4 bg-main ">
+            <h2 className="select-none w-full whitespace-normal overflow-y-auto
+            break-words">{question}</h2>
         </div>
     );
 }
@@ -25,7 +24,7 @@ export default function FlashCard({ question, answer, isFlipped,setFlipped }) {
         
         
 
-        <div className="perspective-1000 w-80 h-100  ">
+        <div className="perspective-1000 w-75 md:w-200 md:aspect-3/2 aspect-8/11">
         <div className="absolute inset-0 bg-white/40 rounded-3xl rotate-2 translate-y-2 translate-x-1 -z-10 shadow-md"></div>
         <div className="absolute inset-0 bg-white/20 rounded-3xl -rotate-1 translate-y-4 -z-20 shadow-sm"></div>
         <div className={`relative w-full h-full
