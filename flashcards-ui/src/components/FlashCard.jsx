@@ -24,7 +24,7 @@ export default function FlashCard({ question, answer, isFlipped,setFlipped }) {
         
         
 
-        <div className="perspective-1000 w-75 md:w-200 md:aspect-4/3 aspect-8/11">
+        <div className="perspective-1000 w-75 md:w-100 lg:w-200 lg:aspect-4/3 aspect-8/11">
         <div className="absolute inset-0 bg-white/40 rounded-3xl rotate-2 translate-y-2 translate-x-1 -z-10 shadow-md"></div>
         <div className="absolute inset-0 bg-white/20 rounded-3xl -rotate-1 translate-y-4 -z-20 shadow-sm"></div>
         <div className={`relative w-full h-full
