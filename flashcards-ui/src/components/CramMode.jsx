@@ -115,10 +115,8 @@ export default function CramMode({item}) {
                 setFlipped={setFlipped}
             />
 
-            <div>
-            { isFlipped &&
+            <div className={`transition-opacity duration-300 ${isFlipped ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                 <FeedBackControls onScore={submitScore}/>
-            }
             </div>
         </div>
     )
