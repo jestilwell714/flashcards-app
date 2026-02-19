@@ -189,12 +189,12 @@ export default function FileExplorer( {refreshKey, onCreate, tagMode, setTagMode
                     </li> 
                 }
                 {(tagMode ? tags : content).map((item) => (
-                    <li className="w-full bg-white/20 border-white/20 relative p-6 flex flex-row items-center cursor-pointer border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 h-32 hover:bg-slate-800/40" key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
+                    <li className="w-full bg-white/20 border-white/20 relative p-5 flex flex-row items-center cursor-pointer border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 h-32 hover:bg-slate-800/40" key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
                         {item.type === "folder" && <IoFolderOpenOutline className="shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60} />}
                         {item.type === "deck" && <TbCards className="shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60} />}
                         {tagMode && <TbTag className="scale-x-[-1] shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60}/>}
-                        <div className="flex-1 min-w-0">
-                            <h3 className={`${!item.type && !tagMode ? "w-66 break-words h- overflow-y-hidden" : "truncate"} self-baseline text-white font-bold text-lg leading-tight`}>{(item.type == null && !tagMode) ? item.question : item.name}</h3>
+                        <div className="flex-1 h-full min-w-0">
+                            <h3 className={`${!item.type && !tagMode ? "w-full h-full break-words pr-4 overflow-y-auto" : "truncate"} self-baseline text-white font-bold text-lg leading-tight`}>{(item.type == null && !tagMode) ? item.question : item.name}</h3>
                             {item.type && <p>{(item.childFoldersSize !== null) && <span className="mx-2 text-rose-600 text-sm font-bold leading-tight">{item.childFoldersSize} folder{item.childFoldersSize !== 1 ? "s" : ""}</span>} 
                             {(item.childDecksSize !== null) && <span className= "mx-2 text-cyan-300 text-sm font-bold leading-tight">{item.childDecksSize} deck{item.childDecksSize !== 1 ? "s" : ""}</span>}
                             {(item.flashcardsSize !== null) && <span className=" mx-2 text-yellow-300 text-sm font-bold leading-tight">{item.flashcardsSize} flashcard{item.flashcardsSize !== 1 ? "s" : ""}</span>}</p> }
