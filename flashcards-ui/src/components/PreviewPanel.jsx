@@ -28,7 +28,7 @@ export default function PreviewPanel( {item, handlePlay} ) {
     return (
         <div className="w-full px-6 pt-4 flex-1 flex flex-col items-center justify-center h-full gap-10 ">
             {type !== "root" ? <div className="flex flex-row gap-3 items-center justify-center cursor-pointer w-full" onClick={ handleEdit}>   
-                <h2 className="max-w-70 overflow-hidden text-center text-3xl text-bold truncate text-white" >{item.name}</h2>
+                <h2 className="max-w-70 md:max-w-100 overflow-hidden text-center text-3xl text-bold truncate text-white" >{item.name}</h2>
                 <FaRegEdit className="shrink-0 text-white text-bold flex-none" size={28} strokeWidth={9}/>
             </div> : <h2 className="text-center text-bold text-white" >Flashcards API</h2>}
             <button className="px-10 py-3 text-white font-black uppercase tracking-widest rounded-full
