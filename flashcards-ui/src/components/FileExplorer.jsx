@@ -152,9 +152,9 @@ export default function FileExplorer( {refreshKey, onCreate, tagMode, setTagMode
     }
 
     return (
-        <div className="">
-            <ul className={` flex flex-col content-center gap-4 w-full  p-4 ${mode === "cram" ? "absolute inset-0 z-50 h-full" : ""}`}>
-                <li className="flex min-w-27 flex-row bg-white/20 border-white/20 relative self-baseline border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 hover:bg-slate-800/40">
+        <div className="w-full">
+            <ul className={` flex flex-col content-center gap-4 w-full max-w-md mx-auto md:max-w-5xl justify-center items-start p-6`}>
+                <li className="flex min-w-27 flex-row bg-white/20 border-white/20 relative self-start  border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 hover:bg-slate-800/40">
                             <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={handleTagMode}><IoMdPricetags className="text-white" size={27}/></button>
                             <button className="m-1 p-2 hover:scale-[1.05] active:scale-95" onClick={() => tagMode ? handleCreate("tag") : type === "deck" ? handleCreate("flashcard") : setShowDropdown(!showDropdown)}>{showDropdown ? <HiX className={`text-white`} size={27} strokeWidth={1.5}/>: <FaPlus className={`text-white`} size={25}/>}</button>
                             
@@ -186,14 +186,14 @@ export default function FileExplorer( {refreshKey, onCreate, tagMode, setTagMode
                     </li> 
                 }
                 
-                <ul className="grid-cols-1 gap-4 content-center grid md:grid-cols-2">
+                <ul className="w-full grid-cols-1 gap-4 content-center grid md:grid-cols-2">
                 {(tagMode ? tags : content).map((item) => (
-                    <li className="md:w-90 lg:w-110 xl:min-w-1 bg-white/20 border-white/20 relative p-6 flex flex-row items-center cursor-pointer border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 h-32 hover:bg-slate-800/40" key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
+                    <li className="w-full bg-white/20 border-white/20 relative p-6 flex flex-row items-center cursor-pointer border-2 rounded-3xl shadow-2xl shadow-black/40 transition-all hover:scale-[1.02] active:scale-95 h-32 hover:bg-slate-800/40" key={`${item.type}-${item.id}`} onClick={() => handleClick(item)}>
                         {item.type === "folder" && <IoFolderOpenOutline className="shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60} />}
                         {item.type === "deck" && <TbCards className="shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60} />}
                         {tagMode && <TbTag className="scale-x-[-1] shrink-0 mr-4 text-white/80 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" size={60}/>}
                         <div className="flex-1 min-w-0">
-                            <h3 className={`${!item.type && !tagMode ? "w-66 break-words overflow-y-hidden" : "truncate"} self-baseline text-white font-bold text-lg leading-tight`}>{(item.type == null && !tagMode) ? item.question : item.name}</h3>
+                            <h3 className={`${!item.type && !tagMode ? "w-66 break-words h- overflow-y-hidden" : "truncate"} self-baseline text-white font-bold text-lg leading-tight`}>{(item.type == null && !tagMode) ? item.question : item.name}</h3>
                             {item.type && <p>{(item.childFoldersSize !== null) && <span className="mx-2 text-rose-600 text-sm font-bold leading-tight">{item.childFoldersSize} folder{item.childFoldersSize !== 1 ? "s" : ""}</span>} 
                             {(item.childDecksSize !== null) && <span className= "mx-2 text-cyan-300 text-sm font-bold leading-tight">{item.childDecksSize} deck{item.childDecksSize !== 1 ? "s" : ""}</span>}
                             {(item.flashcardsSize !== null) && <span className=" mx-2 text-yellow-300 text-sm font-bold leading-tight">{item.flashcardsSize} flashcard{item.flashcardsSize !== 1 ? "s" : ""}</span>}</p> }
