@@ -47,31 +47,33 @@ export default function CreateFlashCard({ onSubmit }) {
 
     return (
         
-        <div>
-        <form onSubmit={handleSubmit} className="relative flex flex-col items-center  gap-4 ">
-            <div className=" border-gray-200          
+        <div className="max-w-md mx-auto md:max-w-5xl h-full">
+        <form onSubmit={handleSubmit} className="h-full w-full flex flex-col items-center  gap-4 pt-8 ">
+            <div className=" h-full border-gray-200          
             rounded-3xl               
             shadow-2xl                 
-            border mt-8 p-4
-            bg-main ">
-            <div className="w-66% flex flex-col gap-2">
+            border  p-4
+            bg-main
+            lg:aspect-4/3 aspect-8/11
+            ">
+            <div className="flex flex-col gap-2">
             <label className="text-black font-bold text-lg leading-tight ">Front</label>
             <textarea 
                 name="question"
                 value={formData.question}
                 onChange={handleChange}
-                rows={3}
+                rows={5}
                 className="text-black leading-tight outline-none border-none resize-none"
             />
             </div>
 
-            <div className="w-66% flex flex-col gap-2">
+            <div className="flex flex-col gap-2">
             <label className=" text-black font-bold text-lg leading-tight">Back</label>
             <textarea
                 name="answer"
                 value={formData.answer}
                 onChange={handleChange}
-                rows={4}
+                rows={5}
                 className="text-black leading-tight outline-none border-none resize-none"
             />
             </div>
