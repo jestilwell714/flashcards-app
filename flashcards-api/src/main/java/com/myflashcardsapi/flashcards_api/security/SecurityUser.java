@@ -1,5 +1,6 @@
-package com.myflashcardsapi.flashcards_api.domain;
+package com.myflashcardsapi.flashcards_api.security;
 
+import com.myflashcardsapi.flashcards_api.domain.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
