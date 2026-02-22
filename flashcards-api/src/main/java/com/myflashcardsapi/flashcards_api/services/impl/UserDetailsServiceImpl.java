@@ -1,0 +1,25 @@
+package com.myflashcardsapi.flashcards_api.services.impl;
+
+import com.myflashcardsapi.flashcards_api.domain.SecurityUser;
+import com.myflashcardsapi.flashcards_api.domain.User;
+import com.myflashcardsapi.flashcards_api.repositories.UserRepository;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserDetailsServiceImpl implements UserDetailsService {
+    private UserRepository userRepository;
+
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+
+        return new SecurityUser(user);
+    }
+}
