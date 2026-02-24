@@ -8,6 +8,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/" element={<Navigate to="/explorer/preview/root/0" replace />} />
         <Route path="/explorer/:mode/:type/:id" element={<Explorer />}/>
         <Route path="/explorer/:mode/:type/:id/card/:cardId" element={<Explorer />} />
