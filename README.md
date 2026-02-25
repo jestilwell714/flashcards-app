@@ -5,18 +5,7 @@
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.3-brightgreen?style=flat-square&logo=spring-boot)
 ![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat-square&logo=react&logoColor=black)
 
-## Duel Study modes
-
-### Cram mode ("lazy update weight logic")
-- **Study at own pace:** Unlike spaced repetition, Cram Mode allows users to study for as little or as long as they like, with the weighted algorithm adjusting mid-session to prioritize harder cards. Making cram mode perfect for preperation for upcoming exams where you don't have enough time for spaced repetition.
-For short-term exam preparation, endless cramming mode.
-- **User Feedback:** after card has been flipped, user can score from 1-4 based if the got the card correct and how difficult it was for them to retain. This score is used to give the card an updated weight.
-- **Weighted lottery:** next cards are randomised, where cards struggled with are mathmatically more probable to appear.
-
-### Spaced repetition (FSRS algorithm) - COMING SOON
-For long-term retention, with a FCFS algorithm.
-
-## Technology Stack
+# Technology Stack
 ### Backend
 * **Language:** Java 21
 * **Framework:** Spring Boot 3.5.3 (Web, Data JPA, Security)
@@ -28,6 +17,31 @@ For long-term retention, with a FCFS algorithm.
 * **Libraries** React 19.2.0, React Router 7.13.0
 * **Styling** Tailwind CSS 4.1.18
 * **Build Tool:** Vite
+
+## Key Features
+
+### Duel Study modes
+
+#### Cram mode ("lazy update weight logic")
+- **Study at own pace:** Unlike spaced repetition, Cram Mode allows users to study for as little or as long as they like, with the weighted algorithm adjusting mid-session to prioritize harder cards. Making cram mode perfect for preperation for upcoming exams where you don't have enough time for spaced repetition.
+For short-term exam preparation, endless cramming mode.
+- **User Feedback:** after card has been flipped, user can score from 1-4 based if the got the card correct and how difficult it was for them to retain. This score is used to give the card an updated weight.
+- **Weighted lottery:** next cards are randomised, where cards struggled with are mathmatically more probable to appear.
+
+#### Spaced repetition (FSRS algorithm) - COMING SOON
+For long-term retention, with a FCFS algorithm.
+
+**Security** (While not neccasary was good practice)
+
+### JWT (Java Web Tokens)
+- When user logs in with correct username and password a JWT is generated and sent back in the response. This token is encrypted and holds the user in the token's payload part, JWT's contain a signature part which detects if the token has been altered allowing my backend to reject altered tokens.
+- The token is added into the local storage of the browser while the user is signed in with a 2 day expiry date.
+- All calls from the frontend to endpoints apart from /auth/* endpoints will attach this token in the header.
+- The backend then checks this header for alterations, expiration and if its not empty. Then grabs the user from the header and puts it in the SecurityContext.
+- The id from this user in the SecurityContext can then be put as a parameter for the endpoints, making sure users can only call endpoints that belong to there user Id.
+
+### Password Hashing
+- Passwords are hashed using the BCrypt hashing method
 
 ## Core API Endpoints
 
@@ -47,3 +61,5 @@ For long-term retention, with a FCFS algorithm.
 | **GET** | `/api/tags` | Get all tags for user |
 | **PUT** | `/flashcards/{flashCardId}` | Updates flashcard with flashcardId |
 | **DELETE** | `/flashcards/{flashCardId}` | Deletes flashcard with flashcardId |
+
+
