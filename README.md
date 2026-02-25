@@ -5,7 +5,8 @@
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.3-brightgreen?style=flat-square&logo=spring-boot)
 ![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat-square&logo=react&logoColor=black)
 
-# Technology Stack
+
+## Technology Stack
 ### Backend
 * **Language:** Java 21
 * **Framework:** Spring Boot 3.5.3 (Web, Data JPA, Security)
@@ -20,6 +21,7 @@
 
 ## Key Features
 
+
 ### Duel Study modes
 
 #### Cram mode ("lazy update weight logic")
@@ -31,7 +33,8 @@ For short-term exam preparation, endless cramming mode.
 #### Spaced repetition (FSRS algorithm) - COMING SOON
 For long-term retention, with a FCFS algorithm.
 
-**Security** (While not neccasary was good practice)
+## Security (While not neccasary was good practice)
+
 
 ### JWT (Java Web Tokens)
 - When user logs in with correct username and password a JWT is generated and sent back in the response. This token is encrypted and holds the user in the token's payload part, JWT's contain a signature part which detects if the token has been altered allowing my backend to reject altered tokens.
@@ -44,6 +47,7 @@ For long-term retention, with a FCFS algorithm.
 - Passwords are hashed using the BCrypt hashing method
 
 ## Core API Endpoints
+
 
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
