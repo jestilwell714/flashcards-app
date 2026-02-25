@@ -1,6 +1,5 @@
 package com.myflashcardsapi.flashcards_api.services;
 
-import com.myflashcardsapi.flashcards_api.domain.Tag;
 import com.myflashcardsapi.flashcards_api.domain.dto.TagDto;
 import org.apache.coyote.BadRequestException;
 

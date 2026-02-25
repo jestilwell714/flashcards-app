@@ -1,8 +1,5 @@
 package com.myflashcardsapi.flashcards_api.domain.dto;
 
-import com.myflashcardsapi.flashcards_api.domain.Deck;
-import com.myflashcardsapi.flashcards_api.domain.Tag;
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

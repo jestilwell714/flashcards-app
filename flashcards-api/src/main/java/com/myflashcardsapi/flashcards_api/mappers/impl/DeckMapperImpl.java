@@ -1,9 +1,7 @@
 package com.myflashcardsapi.flashcards_api.mappers.impl;
 
 import com.myflashcardsapi.flashcards_api.domain.Deck;
-import com.myflashcardsapi.flashcards_api.domain.FlashCard;
 import com.myflashcardsapi.flashcards_api.domain.dto.DeckDto;
-import com.myflashcardsapi.flashcards_api.domain.dto.FlashCardDto;
 import com.myflashcardsapi.flashcards_api.mappers.Mapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

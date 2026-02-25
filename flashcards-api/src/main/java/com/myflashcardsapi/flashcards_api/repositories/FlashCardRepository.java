@@ -1,13 +1,11 @@
 package com.myflashcardsapi.flashcards_api.repositories;
 
 import com.myflashcardsapi.flashcards_api.domain.FlashCard;
-import com.myflashcardsapi.flashcards_api.domain.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Repository
 public interface FlashCardRepository extends JpaRepository<FlashCard, Long> {

@@ -2,6 +2,7 @@ package com.myflashcardsapi.flashcards_api.security;
 
 import com.myflashcardsapi.flashcards_api.domain.User;
 import com.myflashcardsapi.flashcards_api.repositories.UserRepository;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

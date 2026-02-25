@@ -1,8 +1,6 @@
 package com.myflashcardsapi.flashcards_api.mappers.impl;
 
-import com.myflashcardsapi.flashcards_api.domain.FlashCard;
 import com.myflashcardsapi.flashcards_api.domain.Folder;
-import com.myflashcardsapi.flashcards_api.domain.dto.FlashCardDto;
 import com.myflashcardsapi.flashcards_api.domain.dto.FolderDto;
 import com.myflashcardsapi.flashcards_api.mappers.Mapper;
 import org.modelmapper.ModelMapper;

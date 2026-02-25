@@ -1,10 +1,8 @@
 package com.myflashcardsapi.flashcards_api.services.impl;
 
-import com.myflashcardsapi.flashcards_api.domain.Deck;
 import com.myflashcardsapi.flashcards_api.domain.FlashCard;
 import com.myflashcardsapi.flashcards_api.domain.Tag;
 import com.myflashcardsapi.flashcards_api.domain.User;
-import com.myflashcardsapi.flashcards_api.domain.dto.DeckDto;
 import com.myflashcardsapi.flashcards_api.domain.dto.TagDto;
 import com.myflashcardsapi.flashcards_api.mappers.impl.TagMapperImpl;
 import com.myflashcardsapi.flashcards_api.repositories.FlashCardRepository;

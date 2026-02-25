@@ -8,12 +8,17 @@ import com.myflashcardsapi.flashcards_api.mappers.impl.FlashCardMapperImpl;
 import com.myflashcardsapi.flashcards_api.repositories.FlashCardRepository;
 import com.myflashcardsapi.flashcards_api.repositories.TagRepository;
 import com.myflashcardsapi.flashcards_api.repositories.UserRepository;
-import com.myflashcardsapi.flashcards_api.services.*;
+import com.myflashcardsapi.flashcards_api.services.DeckService;
+import com.myflashcardsapi.flashcards_api.services.FlashCardService;
+import com.myflashcardsapi.flashcards_api.services.FolderService;
+import com.myflashcardsapi.flashcards_api.services.StudyEngineService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class FlashCardServiceImpl implements FlashCardService {
