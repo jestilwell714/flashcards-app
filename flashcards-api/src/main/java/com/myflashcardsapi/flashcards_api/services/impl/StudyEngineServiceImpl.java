@@ -1,6 +1,5 @@
 package com.myflashcardsapi.flashcards_api.services.impl;
 
-import com.myflashcardsapi.flashcards_api.domain.FlashCard;
 import com.myflashcardsapi.flashcards_api.domain.dto.FlashCardDto;
 import com.myflashcardsapi.flashcards_api.services.StudyEngineService;
 import org.springframework.stereotype.Service;
