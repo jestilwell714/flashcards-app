@@ -1,12 +1,12 @@
 package com.myflashcardsapi.flashcards_api.controllers;
 
 import com.myflashcardsapi.flashcards_api.domain.dto.TagDto;
+import com.myflashcardsapi.flashcards_api.security.SecurityUser;
 import com.myflashcardsapi.flashcards_api.services.TagService;
-import com.myflashcardsapi.flashcards_api.services.impl.TagServiceImpl;
 import org.apache.coyote.BadRequestException;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +14,6 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = {"http://localhost:5173", "http://192.168.1.150:5173"})
 public class TagController {
     private TagService tagService;
 
@@ -25,16 +24,16 @@ public class TagController {
     // --- CREATE ---
 
     @PostMapping("/tags")
-    public ResponseEntity<TagDto> createTag(@RequestBody TagDto tagDto, @RequestHeader("X-User-ID") Long userId) throws BadRequestException {
-        TagDto tag = tagService.createTag(userId,tagDto);
+    public ResponseEntity<TagDto> createTag(@RequestBody TagDto tagDto, @AuthenticationPrincipal SecurityUser user) throws BadRequestException {
+        TagDto tag = tagService.createTag(user.getId(),tagDto);
         return new ResponseEntity<>(tag, HttpStatus.CREATED);
     }
 
     // --- READ ---
     @GetMapping("/tags/{tagId}")
-    public ResponseEntity<TagDto> getTagByTagId(@PathVariable Long tagId, @RequestHeader("X-User-Id") Long userId) {
+    public ResponseEntity<TagDto> getTagByTagId(@PathVariable Long tagId, @AuthenticationPrincipal SecurityUser user) {
         try {
-            TagDto tag = tagService.getTagByIdAndUser(tagId,userId).get();
+            TagDto tag = tagService.getTagByIdAndUser(tagId,user.getId()).get();
             return new ResponseEntity<>(tag,HttpStatus.OK);
         } catch(NoSuchElementException ex) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -42,20 +41,20 @@ public class TagController {
     }
 
     @GetMapping("/tags")
-    public List<TagDto> getTagsByUserId(@RequestHeader("X-User-ID") Long userId) {
-        return tagService.getAllTagsForUser(userId);
+    public List<TagDto> getTagsByuserId(@AuthenticationPrincipal SecurityUser user) {
+        return tagService.getAllTagsForUser(user.getId());
     }
 
     // --- UPDATE ---
     @PutMapping("/tags/{tagId}")
-    public ResponseEntity<TagDto> updateTag(@RequestBody TagDto tagDto, @PathVariable Long tagId, @RequestHeader("X-User-ID") Long userId) throws BadRequestException {
-        TagDto tag = tagService.updateTag(userId,tagId,tagDto);
+    public ResponseEntity<TagDto> updateTag(@RequestBody TagDto tagDto, @PathVariable Long tagId, @AuthenticationPrincipal SecurityUser user) throws BadRequestException {
+        TagDto tag = tagService.updateTag(user.getId(),tagId,tagDto);
         return new ResponseEntity<>(tag,HttpStatus.OK);
     }
 
     @DeleteMapping("/tags/{tagId}")
-    public ResponseEntity<Void> deleteTag(@RequestHeader("X-User-ID") Long userId, @PathVariable Long tagId) {
-        tagService.deleteTag(userId,tagId);
+    public ResponseEntity<Void> deleteTag(@AuthenticationPrincipal SecurityUser user, @PathVariable Long tagId) {
+        tagService.deleteTag(user.getId(),tagId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
