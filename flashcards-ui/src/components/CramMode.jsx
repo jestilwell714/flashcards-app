@@ -29,7 +29,7 @@ export default function CramMode({item}) {
         fetch(fetchMoreCardsUrl, {
             headers: {
                 'Content-Type': 'application/json',
-                'X-User-ID': '1'
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
         .then((response) => {
@@ -61,7 +61,7 @@ export default function CramMode({item}) {
         fetch(`${submitScoreUrl}/${cardId}/score`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json',
-                       'X-User-ID': '1'
+                       'Authorization': `Bearer ${localStorage.getItem('token')}`
                      },
             body: JSON.stringify(score)
         })

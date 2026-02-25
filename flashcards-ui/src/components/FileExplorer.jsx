@@ -25,7 +25,7 @@ export default function FileExplorer( {refreshKey, onCreate, tagMode, setTagMode
         fetch(fetchContentsUrl, {
             headers: {
                 'Content-Type': 'application/json',
-                'X-User-ID': '1'
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
         .then(response => response.json())
@@ -70,7 +70,7 @@ export default function FileExplorer( {refreshKey, onCreate, tagMode, setTagMode
         fetch(fetchTagUrl, {
             headers: {
                 'Content-Type': 'application/json',
-                'X-User-ID': '1'
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
         .then(response => response.json())
@@ -130,7 +130,7 @@ export default function FileExplorer( {refreshKey, onCreate, tagMode, setTagMode
         fetch(`${API_BASE_URL}/api/${itemType}s/${itemId}`, {
         method: 'DELETE',
         headers: {
-            'X-User-ID': '1'
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
         })
         .then(response => {

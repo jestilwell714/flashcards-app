@@ -24,7 +24,7 @@ export default function CreateDeckFolderOrTag( {parentId, type, initialData, onS
         fetch(url, {
             method: isEdit ? 'PUT' : 'POST',
             headers: { 'Content-Type': 'application/json',
-                       'X-User-ID': '1'
+                       'Authorization': `Bearer ${localStorage.getItem('token')}`
             },
             body: JSON.stringify(formData),
         })

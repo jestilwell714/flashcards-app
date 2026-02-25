@@ -14,7 +14,7 @@ export default function CreateFlashCard({ onSubmit }) {
            fetch(`${API_BASE_URL}/api/flashcards/${cardId}`,  {
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-User-ID': '1'
+                    'Authorization': `Bearer ${localStorage.getItem('token')}`
                 }
             })
             .then(response => response.json())
@@ -30,7 +30,7 @@ export default function CreateFlashCard({ onSubmit }) {
         fetch(url, {
             method: isEdit ? 'PUT' : 'POST',
             headers: { 'Content-Type': 'application/json',
-                       'X-User-ID': '1'
+                       'Authorization': `Bearer ${localStorage.getItem('token')}`
                     },
             body: JSON.stringify(formData),
         })
