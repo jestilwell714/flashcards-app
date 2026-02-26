@@ -40,7 +40,7 @@ export default function Explorer() {
         fetch( `${API_BASE_URL}/api/${type}s/${id}`, {
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`,
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
         .then(response => response.json())
