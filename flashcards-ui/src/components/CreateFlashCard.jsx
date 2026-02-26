@@ -6,7 +6,13 @@ import { API_BASE_URL } from "../config";
 export default function CreateFlashCard({ onSubmit }) {
   const { id, cardId, mode } = useParams();
   const isEdit = mode == "edit";
-  const [formData, setFormData] = useState({ question: "", answer: "" });
+  const [formData, setFormData] = useState({
+    question: "",
+    answer: "",
+    tags: "",
+  });
+  const [tags, setTags] = useState();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const url = isEdit
     ? `${API_BASE_URL}/api/flashcards/${formData.id}`
     : `${API_BASE_URL}/api/decks/${id}/flashcards`;
@@ -25,6 +31,18 @@ export default function CreateFlashCard({ onSubmit }) {
         })
         .catch((err) => console.error("Fetch failed:", err));
     }
+
+    fetch(`${API_BASE_URL}/api/tags`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setTags(data);
+      })
+      .catch((err) => console.error("Fetch failed:", err));
   }, [cardId, isEdit]);
 
   function handleSubmit(e) {
@@ -47,6 +65,15 @@ export default function CreateFlashCard({ onSubmit }) {
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  function handleTagChange(tagId) {
+    setFormData((prev) => ({
+      ...prev,
+      tags: (prev.tags || []).includes(tagId)
+        ? prev.tags.filter((id) => id !== tagId)
+        : [...(prev.tags || []), tagId],
+    }));
   }
 
   return (
@@ -72,7 +99,7 @@ export default function CreateFlashCard({ onSubmit }) {
               name="question"
               value={formData.question}
               onChange={handleChange}
-              rows={5}
+              rows={4}
               className="text-black leading-tight outline-none border-none resize-none"
             />
           </div>
@@ -85,9 +112,61 @@ export default function CreateFlashCard({ onSubmit }) {
               name="answer"
               value={formData.answer}
               onChange={handleChange}
-              rows={5}
+              rows={4}
               className="text-black leading-tight outline-none border-none resize-none"
             />
+          </div>
+
+          <div className="grow">
+            <button
+              type="button"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              className=""
+            >
+              <span className="truncate font-bold text-lg leading-tight">
+                {formData.tags?.length > 0
+                  ? `${formData.tags.length} tags selected`
+                  : "Tags "}
+              </span>
+              <span
+                className={`transform transition-transform ${isDropdownOpen ? "rotate-180" : ""}`}
+              >
+                ▼
+              </span>
+            </button>
+
+            {isDropdownOpen && (
+              <>
+                <div
+                  onClick={() => setIsDropdownOpen(false)}
+                ></div>
+
+                <div className="p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700" >
+                  {(tags || []).length > 0 ? (
+                    tags.map((tag) => (
+                      <label
+                        key={tag.id}
+                        className="flex items-center space-x-3 cursor-pointer"
+                      >
+                        <input
+                          type="checkbox"
+                          className="w-4 h-4 accent-orange-500 rounded border-slate-600 bg-slate-700"
+                          checked={(formData.tags || []).includes(tag.id)}
+                          onChange={() => handleTagChange(tag.id)}
+                        />
+                        <span className="text-black text-sm">
+                          {tag.name}
+                        </span>
+                      </label>
+                    ))
+                  ) : (
+                    <p className="text-white/50 p-2 text-sm italic">
+                      No tags found
+                    </p>
+                  )}
+                </div>
+              </>
+            )}
           </div>
         </div>
         <button
