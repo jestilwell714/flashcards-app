@@ -48,7 +48,6 @@ public class FlashCardServiceImpl implements FlashCardService {
     }
 
     @Override
-    @Transactional
     public FlashCardDto createFlashCard(Long userId, Long deckId, FlashCardDto flashCardDto) throws BadRequestException {
         // Set deck
         FlashCard flashCard = flashCardMapper.mapFrom(flashCardDto);
@@ -60,9 +59,7 @@ public class FlashCardServiceImpl implements FlashCardService {
             if (tags.size() != flashCardDto.getTagIds().size()) {
                 throw new BadRequestException("One or more provided tag IDs are invalid or not owned by user.");
             }
-            for (Tag tag : tags) {
-                flashCard.addTag(tag);
-            }
+            flashCard.setTags(tags);
         }
 
         FlashCard savedFlashCard = flashCardRepository.save(flashCard);
@@ -95,7 +92,6 @@ public class FlashCardServiceImpl implements FlashCardService {
     }
 
     @Override
-    @Transactional
     public FlashCardDto updateFlashCard(Long userId, Long flashCardId, FlashCardDto flashCardDto) throws BadRequestException {
         FlashCard flashCard = flashCardRepository.findByIdAndDeckUserId(flashCardId, userId).get();
         
