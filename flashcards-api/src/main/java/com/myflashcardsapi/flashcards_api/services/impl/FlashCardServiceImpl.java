@@ -117,6 +117,7 @@ public class FlashCardServiceImpl implements FlashCardService {
             if (tags.size() != flashCardDto.getTagIds().size()) {
                 throw new BadRequestException("One or more provided tag IDs are invalid or not owned by user.");
             }
+            flashCard.getTags().clear();
             for (Tag tag : tags) {
                 flashCard.addTag(tag);
             }
