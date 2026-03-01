@@ -42,4 +42,9 @@ public class FlashCard {
 
     @Column(nullable = false)
     private double weight = 100.0;
+
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+        tag.getFlashCards().add(this);
+    }
 }
