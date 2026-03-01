@@ -146,7 +146,7 @@ export default function CreateFlashCard({ onSubmit }) {
                   onClick={() => setIsDropdownOpen(false)}
                 ></div>
 
-                <div className="p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700" >
+                <div className="relative p-2 z-99 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700" >
                   {(tags || []).length > 0 ? (
                     tags.map((tag) => (
                       <label
