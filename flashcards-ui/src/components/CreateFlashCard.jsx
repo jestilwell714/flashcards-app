@@ -9,7 +9,7 @@ export default function CreateFlashCard({ onSubmit }) {
   const [formData, setFormData] = useState({
     question: "",
     answer: "",
-    tags: "",
+    tagIds: [],
   });
   const [tags, setTags] = useState();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -67,10 +67,12 @@ export default function CreateFlashCard({ onSubmit }) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  function handleTagChange(tagId) {
+  function handleTagChange(tag) {
+    const tagId = Number(tag);
+
     setFormData((prev) => ({
       ...prev,
-      tags: (prev.tags || []).includes(tagId)
+      tagIds: (prev.tags || []).includes(tagId)
         ? prev.tags.filter((id) => id !== tagId)
         : [...(prev.tags || []), tagId],
     }));
@@ -124,8 +126,8 @@ export default function CreateFlashCard({ onSubmit }) {
               className=""
             >
               <span className="truncate font-bold text-lg leading-tight">
-                {formData.tags?.length > 0
-                  ? `${formData.tags.length} tags selected`
+                {formData.tagIds?.length > 0
+                  ? `${formData.tagIds.length} tags selected`
                   : "Tags "}
               </span>
               <span
@@ -151,7 +153,7 @@ export default function CreateFlashCard({ onSubmit }) {
                         <input
                           type="checkbox"
                           className="w-4 h-4 accent-orange-500 rounded border-slate-600 bg-slate-700"
-                          checked={(formData.tags || []).includes(tag.id)}
+                          checked={(formData.tagIds || []).includes(tag.id)}
                           onChange={() => handleTagChange(tag.id)}
                         />
                         <span className="text-black text-sm">
