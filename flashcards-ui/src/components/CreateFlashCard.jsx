@@ -27,7 +27,10 @@ export default function CreateFlashCard({ onSubmit }) {
       })
         .then((response) => response.json())
         .then((data) => {
-          setFormData(data);
+          setFormData({
+            ...data,
+            tagIds: data.tagIds ? data.tagIds : []
+          });
         })
         .catch((err) => console.error("Fetch failed:", err));
     }
@@ -72,9 +75,9 @@ export default function CreateFlashCard({ onSubmit }) {
 
     setFormData((prev) => ({
       ...prev,
-      tagIds: (prev.tags || []).includes(tagId)
-        ? prev.tags.filter((id) => id !== tagId)
-        : [...(prev.tags || []), tagId],
+      tagIds: (prev.tagIds || []).includes(tagId)
+        ? prev.tagIds.filter((id) => id !== tagId)
+        : [...(prev.tagIds || []), tagId],
     }));
   }
 
