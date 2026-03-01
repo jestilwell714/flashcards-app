@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -20,5 +21,5 @@ public class TagDto {
 
     private Long userId;
 
-    private List<Long> flashCardIds;
+    private Set<Long> flashCardIds;
 }

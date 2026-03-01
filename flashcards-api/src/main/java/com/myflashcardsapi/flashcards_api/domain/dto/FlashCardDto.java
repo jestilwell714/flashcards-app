@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -19,7 +20,7 @@ public class FlashCardDto {
 
     private String answer;
 
-    private List<Long> tagIds;
+    private Set<Long> tagIds;
 
     private Long deckId;
 
