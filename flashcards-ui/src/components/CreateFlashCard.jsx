@@ -94,9 +94,11 @@ export default function CreateFlashCard({ onSubmit }) {
             border  p-4
             bg-main
             lg:aspect-4/3 aspect-8/11
+            flex flex-col
+            
             "
         >
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2 flex-1">
             <label className="text-black font-bold text-lg leading-tight ">
               Front
             </label>
@@ -104,25 +106,25 @@ export default function CreateFlashCard({ onSubmit }) {
               name="question"
               value={formData.question}
               onChange={handleChange}
-              rows={4}
-              className="text-black leading-tight outline-none border-none resize-none"
+       
+              className="w-full grow text-black leading-tight outline-none border-none resize-none"
             />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label className=" text-black font-bold text-lg leading-tight">
+          <div className="flex flex-col gap-2 flex-1">
+            <label className="text-black font-bold text-lg leading-tight">
               Back
             </label>
             <textarea
               name="answer"
               value={formData.answer}
               onChange={handleChange}
-              rows={4}
-              className="text-black leading-tight outline-none border-none resize-none"
+       
+              className="w-full grow text-black leading-tight outline-none border-none resize-none"
             />
           </div>
 
-          <div className="grow">
+          <div className="">
             <button
               type="button"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -146,7 +148,7 @@ export default function CreateFlashCard({ onSubmit }) {
                   onClick={() => setIsDropdownOpen(false)}
                 ></div>
 
-                <div className="relative p-2 z-99 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700" >
+                <div className="absolute w-full z-99 p-2 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700" >
                   {(tags || []).length > 0 ? (
                     tags.map((tag) => (
                       <label
