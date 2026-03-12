@@ -28,7 +28,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://192.168.8.69:5173"));
+        configuration.setAllowedOrigins(List.of("http://localhost:5173", "http://flashcrds.s3-website-ap-southeast-2.amazonaws.com"));
 
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
 
