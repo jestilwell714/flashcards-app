@@ -1,9 +1,12 @@
 # Java/Spring Boot REST API FlashCards Project
 
-![Status](https://img.shields.io/badge/Status-Deployed-v1.0-green?style=flat-square)
-![Java](https://img.shields.io/badge/Java-21-blue?style=flat-square&logo=openjdk)
+http://flashcrds.s3-website-ap-southeast-2.amazonaws.com/
+
+![Status](https://img.shields.io/badge/Status-Deployed-green?style=flat-square)
+![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.3-brightgreen?style=flat-square&logo=spring-boot)
 ![React](https://img.shields.io/badge/React-19.2.0-61DAFB?style=flat-square&logo=react&logoColor=black)
+
 
 
 ## Technology Stack
@@ -18,6 +21,31 @@
 * **Libraries** React 19.2.0, React Router 7.13.0
 * **Styling** Tailwind CSS 4.1.18
 * **Build Tool:** Vite
+
+<h2 align="center">Mobile Screenshots and Demo</h2>
+
+<table style="width:100%">
+  <tr>
+    <th>Home Page</th>
+    <th>Inside Folder</th>
+    <th>Cram mode demo</th>
+  </tr>
+  <tr>
+    
+  <td><img src="https://github.com/user-attachments/assets/658a29ac-8c97-4a3e-b0b6-6ee770dabe6b" width="250"></td>
+    <td><img src="https://github.com/user-attachments/assets/56abe248-7803-4eb6-b3b4-99824592d961" width="250"></td>
+    <td><img src="https://github.com/user-attachments/assets/000185dc-5e63-43cd-b51f-7cfc1f76e932" width="250"></td>
+  </tr>
+  <th>Inside sub Folder</th>
+    <th>Inside Deck</th>
+    <th>Tag List</th>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/f0713381-52fb-4520-8d07-83f27d3a3cf5" width="250"></td>
+    <td><img src="https://github.com/user-attachments/assets/cf7dc345-6fbf-496e-a23b-3c7a3db5bfb5" width="250"></td>
+    <td><img src="https://github.com/user-attachments/assets/d43a6db3-a217-4b38-9ed0-cdd2cba8da66" width="250"></td>
+  </tr>
+</table>
 
 ## Key Features
 
