@@ -5,6 +5,7 @@ import CreatePanel from "../components/CreatePanel";
 import FileExplorer from "../components/FileExplorer";
 import CramMode from "../components/CramMode";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { MdOutlineAccountCircle } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -54,6 +55,16 @@ export default function Explorer() {
     navigate(url, { replace: true });
   }
 
+  const handleSignout = () => {
+    const confirmSignout = window.confirm("Are you sure you want to sign out?");
+    
+    if(confirmSignout) {
+    localStorage.removeItem("token"); 
+    
+    window.location.href = "/"; 
+    }
+};
+
   return (
     <div className="grad overflow-y-auto grid grid-rows-[38vh_1fr] h-dvh w-screen relative">
       <div className="w-full">
@@ -68,6 +79,19 @@ export default function Explorer() {
             />
           </a>
         )}
+        { !cardId && !(mode === "create" && type === "deck") && mode !== "cram" && (
+          <a
+            className="cursor-pointer absolute right-4 top-5"
+            onClick={() => handleSignout()}
+          >
+            <MdOutlineAccountCircle 
+              className="text-white hover:scale-[1.05] active:scale-95"
+              size={26}
+            />
+          </a>
+        )
+
+        }
         {mode === "preview" && (
           <PreviewPanel item={selectedItem} handlePlay={handlePlay} />
         )}
