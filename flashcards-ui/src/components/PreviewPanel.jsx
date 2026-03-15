@@ -41,7 +41,7 @@ export default function PreviewPanel({ item, handlePlay }) {
           />
         </div>
       ) : (
-        <h2 className="text-center text-bold text-white">Flashcards API</h2>
+        <h2 className="text-center text-bold text-white">FLASHCARDS APP</h2>
       )}
       <button
         className="px-10 py-3 text-white font-black uppercase tracking-widest rounded-full
