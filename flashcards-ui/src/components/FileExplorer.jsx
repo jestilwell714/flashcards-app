@@ -295,7 +295,7 @@ export default function FileExplorer({
                 )}
               </div>
               <button
-                className="absolute bottom-4 right-4 flex items-center justidy-center"
+                className="absolute p-2 bottom-2 right-2 flex items-center justify-center"
                 onClick={(e) => handleDelete(e, item)}
               >
                 <FaRegTrashAlt
