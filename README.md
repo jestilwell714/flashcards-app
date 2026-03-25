@@ -1,6 +1,4 @@
-# **Cramly**
-
-## A Fullstack REST API Flashcards App
+# **Cramly** - A Fullstack REST API Flashcards App
 
 https://cramly.xyz/
 
@@ -43,9 +41,9 @@ https://cramly.xyz/
     <th>Tag List</th>
   </tr>
   <tr>
-    <td width="33%"><img src="https://github.com/user-attachments/assets/f0713381-52fb-4520-8d07-83f27d3a3cf5" width="250"></td>
-    <td width="33%"><img src="https://github.com/user-attachments/assets/cf7dc345-6fbf-496e-a23b-3c7a3db5bfb5" width="250"></td>
-    <td width="33%"><img src="https://github.com/user-attachments/assets/d43a6db3-a217-4b38-9ed0-cdd2cba8da66" width="250"></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/f0713381-52fb-4520-8d07-83f27d3a3cf5" width=""></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/cf7dc345-6fbf-496e-a23b-3c7a3db5bfb5" width=""></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/d43a6db3-a217-4b38-9ed0-cdd2cba8da66" width=""></td>
   </tr>
 </table>
 
