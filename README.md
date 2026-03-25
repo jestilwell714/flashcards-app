@@ -1,6 +1,8 @@
-# Java/Spring Boot REST API FlashCards Project
+# **Cramly**
 
-http://flashcrds.s3-website-ap-southeast-2.amazonaws.com/
+## A Fullstack REST API Flashcards App
+
+https://cramly.xyz/
 
 ![Status](https://img.shields.io/badge/Status-Deployed-green?style=flat-square)
 ![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=openjdk)
