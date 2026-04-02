@@ -35,13 +35,13 @@ export default function PreviewPanel({ item, handlePlay }) {
             {item.name}
           </h2>
           <FaRegEdit
-            className="shrink-0 text-white text-bold flex-none"
+            className="shrink-0 text-white  text-bold flex-none"
             size={28}
             strokeWidth={9}
           />
         </div>
       ) : (
-        <h2 className="text-center text-bold text-white">FLASHCARDS APP</h2>
+        <h2 className="text-center font-extrabold tracking-widest text-5xl text-white">CRAMLY</h2>
       )}
       <button
         className="px-10 py-3 text-white font-black uppercase tracking-widest rounded-full
