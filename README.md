@@ -32,7 +32,7 @@ https://cramly.xyz/
   </tr>
   <tr>
     
-  <td width="33%"><img src="https://github.com/user-attachments/assets/658a29ac-8c97-4a3e-b0b6-6ee770dabe6b" width=""></td>
+  <td width="33%"><img src="https://github.com/user-attachments/assets/75ad07c9-b04c-48da-98c5-cf5a9e61a966" width=""></td>
     <td width="33%"><img src="https://github.com/user-attachments/assets/56abe248-7803-4eb6-b3b4-99824592d961" width=""></td>
     <td width="33%"><img src="https://github.com/user-attachments/assets/000185dc-5e63-43cd-b51f-7cfc1f76e932" width=""></td>
   </tr>
