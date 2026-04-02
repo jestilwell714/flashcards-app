@@ -19,7 +19,7 @@ export default function Explorer() {
 
   function handleCardCreated() {
     triggerRefresh();
-    navigate(`/explorer/preview/deck/${id}`, { replace: true });
+    navigate(-1);
   }
 
   function handleCardEdited(updatedItem) {
