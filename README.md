@@ -1,6 +1,6 @@
-# Java/Spring Boot REST API FlashCards Project
+# **Cramly** - A Fullstack REST API Flashcards App
 
-http://flashcrds.s3-website-ap-southeast-2.amazonaws.com/
+https://cramly.xyz/
 
 ![Status](https://img.shields.io/badge/Status-Deployed-green?style=flat-square)
 ![Java](https://img.shields.io/badge/Java-21-orange?style=flat-square&logo=openjdk)
@@ -32,18 +32,18 @@ http://flashcrds.s3-website-ap-southeast-2.amazonaws.com/
   </tr>
   <tr>
     
-  <td><img src="https://github.com/user-attachments/assets/658a29ac-8c97-4a3e-b0b6-6ee770dabe6b" width="250"></td>
-    <td><img src="https://github.com/user-attachments/assets/56abe248-7803-4eb6-b3b4-99824592d961" width="250"></td>
-    <td><img src="https://github.com/user-attachments/assets/000185dc-5e63-43cd-b51f-7cfc1f76e932" width="250"></td>
+  <td width="33%"><img src="https://github.com/user-attachments/assets/75ad07c9-b04c-48da-98c5-cf5a9e61a966" width=""></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/56abe248-7803-4eb6-b3b4-99824592d961" width=""></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/000185dc-5e63-43cd-b51f-7cfc1f76e932" width=""></td>
   </tr>
   <th>Inside sub Folder</th>
     <th>Inside Deck</th>
     <th>Tag List</th>
   </tr>
   <tr>
-    <td><img src="https://github.com/user-attachments/assets/f0713381-52fb-4520-8d07-83f27d3a3cf5" width="250"></td>
-    <td><img src="https://github.com/user-attachments/assets/cf7dc345-6fbf-496e-a23b-3c7a3db5bfb5" width="250"></td>
-    <td><img src="https://github.com/user-attachments/assets/d43a6db3-a217-4b38-9ed0-cdd2cba8da66" width="250"></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/f0713381-52fb-4520-8d07-83f27d3a3cf5" width=""></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/cf7dc345-6fbf-496e-a23b-3c7a3db5bfb5" width=""></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/d43a6db3-a217-4b38-9ed0-cdd2cba8da66" width=""></td>
   </tr>
 </table>
 
